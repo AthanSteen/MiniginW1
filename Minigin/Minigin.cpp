@@ -12,6 +12,8 @@
 #include "chrono"
 #include "thread"
 
+#include <iostream>
+
 SDL_Window* g_window{};
 
 void PrintSDLVersion()
@@ -77,8 +79,6 @@ dae::Minigin::~Minigin()
 	SDL_Quit();
 }
 
-#include <iostream>
-
 void dae::Minigin::Run(const std::function<void()>& load)
 {
 	load();
@@ -87,7 +87,6 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 
-	// todo: this update loop could use some work.
 	bool doContinue = true;
     auto lastTime = std::chrono::high_resolution_clock::now(); 
 	float lag = 0.0f;
@@ -98,7 +97,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	
 	while (doContinue)
 	{
-		const auto currentTime = std::chrono::high_resolution_clock().now();
+		const auto currentTime = std::chrono::steady_clock().now();
 		const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count(); 
 		lastTime = currentTime;
 		lag += deltaTime;
@@ -113,7 +112,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		sceneManager.Update(deltaTime);
 		renderer.Render();
 
-		const auto sleepTime = currentTime + std::chrono::milliseconds(msPerFrame) - std::chrono::high_resolution_clock().now();
+		const auto sleepTime = currentTime + std::chrono::milliseconds(msPerFrame) - std::chrono::steady_clock().now();
 		
 		std::cout << sleepTime << std::endl; 
 

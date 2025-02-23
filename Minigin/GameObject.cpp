@@ -1,27 +1,41 @@
 #include <string>
 #include "GameObject.h"
+#include "Component.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
 
-dae::GameObject::~GameObject() = default;
-
 void dae::GameObject::Update(const float deltaTime)
 {
-	(void)deltaTime; // prevent warnings
+	for (auto& component : m_components)
+	{
+		component->Update(deltaTime);
+	}
 }
 
 void dae::GameObject::Render() const
 {
-	const auto& pos = m_transform.GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
-}
-
-void dae::GameObject::SetTexture(const std::string& filename)
-{
-	m_texture = ResourceManager::GetInstance().LoadTexture(filename);
+	for (const auto& component : m_components)
+	{
+		component->Render();
+	}
 }
 
 void dae::GameObject::SetPosition(float x, float y)
 {
 	m_transform.SetPosition(x, y, 0.0f);
+}
+
+void dae::GameObject::Destroy()
+{
+	m_MarkedToDestroy = true;
+
+	//for (const auto child : m_Children)
+	//{
+	//	child->Destroy();
+	//}
+}
+
+bool dae::GameObject::IsMarkedToDestroy() const
+{
+	return m_MarkedToDestroy;
 }
