@@ -40,10 +40,15 @@ namespace dae
     {
         if (m_textTexture)
         {
-            const auto& pos = GetOwner()->GetTransform().GetPosition();
+            const auto& pos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();
             Renderer::GetInstance().RenderTexture(*m_textTexture, pos.x, pos.y);
         }
     }
+
+	void TextComponent::SetLocalPosition(float x, float y)
+	{
+		m_localTransform.SetPosition(x, y, 0.0f);
+	}
 
     void TextComponent::SetText(const std::string& text)
     {

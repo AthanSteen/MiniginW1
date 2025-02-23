@@ -20,8 +20,14 @@ namespace dae
 		void Update(const float deltaTime);
 		void Render() const;
 
-		void SetPosition(float x, float y);
-		const Transform& GetTransform() const { return m_transform; };
+		void SetLocalPosition(float x, float y);
+		void SetLocalPosition(const glm::vec3& pos);
+		void SetParent(GameObject* pNewParent, bool worldPositionStays);
+		std::vector<GameObject*>& GetChildrenVector();
+
+		Transform GetWorldTransform();
+		GameObject* GetParent() const;
+		void SetPositionIsDirty();
 
 		void Destroy();
 		bool IsMarkedToDestroy() const;
@@ -63,10 +69,16 @@ namespace dae
 		}
 
 	private:
-		bool m_MarkedToDestroy{ };
+		void UpdateWorldPosition();
 
-		Transform m_transform{};
+		bool m_positionIsDirty{ true };
+		bool m_markedToDestroy{ };
+
+		Transform m_localTransform{ };
+		Transform m_worldTransform{ };
+		GameObject* m_pParent{ nullptr };
 
 		std::vector<std::unique_ptr<Component>> m_components;
+		std::vector<GameObject*> m_children;
 	};
 }

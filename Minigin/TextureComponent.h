@@ -4,6 +4,7 @@
 #include "Texture2D.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
+#include "Transform.h"
 
 namespace dae
 {
@@ -19,9 +20,12 @@ namespace dae
 
         void Update(float deltaTime) override;
         void Render() const override;
-        void SetTexture(const std::string& filename);
+        void SetLocalPosition(float x, float y) override;
+
+        void SetTexture(const std::string& filename);   
 
     private:
+        Transform m_localTransform;
         std::shared_ptr<Texture2D> m_texture;
     };
 }

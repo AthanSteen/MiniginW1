@@ -5,6 +5,7 @@
 #include "Component.h"
 #include "Font.h"
 #include "Texture2D.h"
+#include "Transform.h"
 
 namespace dae
 {
@@ -15,11 +16,13 @@ namespace dae
 
         void Update(float deltaTime) override;
         void Render() const override;
+        void SetLocalPosition(float x, float y) override;
 
         void SetText(const std::string& text);
 
     private:
         bool m_needsUpdate{ true };
+        Transform m_localTransform;
         std::string m_text;
         std::shared_ptr<Font> m_font;
         std::shared_ptr<Texture2D> m_textTexture;

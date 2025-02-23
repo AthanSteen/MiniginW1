@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include <chrono>
+#include "Transform.h"
 
 namespace dae
 {
@@ -18,7 +19,10 @@ namespace dae
         void Update(float deltaTime) override;
 		void Render() const override;
 
+        void SetLocalPosition(float x, float y) override;
+
     private:
+		Transform m_localTransform;
         float m_fps = 0.f;
         TextComponent* m_textComponent;
     };

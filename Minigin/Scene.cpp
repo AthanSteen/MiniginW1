@@ -35,10 +35,10 @@ void Scene::Update(const float deltaTime)
 		object->Update(deltaTime);
 	}
 
-	auto rangeToDestroy = std::ranges::remove_if(m_objects.begin(), m_objects.end(), [](const auto& object)
-		{
-			return object->IsMarkedToDestroy();
-		});
+	auto rangeToDestroy = std::ranges::remove_if(m_objects, [](const auto& object)
+	{
+		return object->IsMarkedToDestroy();
+	});
 
 	m_objects.erase(rangeToDestroy.begin(), m_objects.end());
 }

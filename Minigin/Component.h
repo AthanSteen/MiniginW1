@@ -17,6 +17,7 @@ namespace dae
         virtual void Update(float deltaTime) = 0;
         virtual void Render() const = 0;
 
+        virtual void SetLocalPosition(float x, float y) = 0;
         virtual void Destroy() { m_markedToDestroy = true; }
 		virtual bool IsMarkedToDestroy() const { return m_markedToDestroy; }
     protected:

@@ -7,7 +7,7 @@
 namespace dae
 {
 	TextureComponent::TextureComponent(GameObject* ownerPtr, const std::string& filename)
-		: Component(ownerPtr)
+		: Component(ownerPtr), m_texture(nullptr)
 	{
 		SetTexture(filename);
 	}
@@ -21,7 +21,7 @@ namespace dae
 	{
 		if (m_texture)
 		{
-			const auto& pos = GetOwner()->GetTransform().GetPosition();
+			const auto& pos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();
 			Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
 		}
 	}
@@ -29,5 +29,10 @@ namespace dae
 	void TextureComponent::SetTexture(const std::string& filename)
 	{
 		m_texture = ResourceManager::GetInstance().LoadTexture(filename);
+	}
+
+	void TextureComponent::SetLocalPosition(float x, float y)
+	{
+		m_localTransform.SetPosition(x, y, 0.0f);
 	}
 }
