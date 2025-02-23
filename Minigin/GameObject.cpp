@@ -46,13 +46,16 @@ namespace dae
 
 	void GameObject::UpdateWorldPosition()
 	{
-		if (m_pParent == nullptr)
+		if (m_positionIsDirty)
 		{
-			m_worldTransform.SetPosition(m_localTransform.GetPosition());
-		}
-		else
-		{
-			m_worldTransform.SetPosition(m_pParent->GetWorldTransform().GetPosition());
+			if (m_pParent == nullptr)
+			{
+				m_worldTransform.SetPosition(m_localTransform.GetPosition());
+			}
+			else
+			{
+				m_worldTransform.SetPosition(m_pParent->GetWorldTransform().GetPosition());
+			}
 		}
 		m_positionIsDirty = false;
 	}
