@@ -22,7 +22,7 @@ namespace dae
         void SetLocalPosition(float x, float y) override;
 
     private:
-		Transform m_localTransform;
+        Transform m_localTransform{};
         float m_fps = 0.f;
         TextComponent* m_textComponent;
     };

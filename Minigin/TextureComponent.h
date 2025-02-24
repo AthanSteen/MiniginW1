@@ -25,7 +25,7 @@ namespace dae
         void SetTexture(const std::string& filename);   
 
     private:
-        Transform m_localTransform;
+        Transform m_localTransform{};
         std::shared_ptr<Texture2D> m_texture;
     };
 }

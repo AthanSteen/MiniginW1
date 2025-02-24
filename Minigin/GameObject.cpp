@@ -27,12 +27,13 @@ namespace dae
 
 	void GameObject::SetLocalPosition(float x, float y)
 	{
-		m_localTransform.SetPosition(x, y, 0.0f);
+		SetLocalPosition(glm::vec3(x, y, 0.0f));
 	}
 
 	void GameObject::SetLocalPosition(const glm::vec3& pos)
 	{
 		m_localTransform.SetPosition(pos);
+		SetPositionIsDirty();
 	}
 
 	Transform GameObject::GetWorldTransform()
@@ -54,7 +55,7 @@ namespace dae
 			}
 			else
 			{
-				m_worldTransform.SetPosition(m_pParent->GetWorldTransform().GetPosition());
+				m_worldTransform.SetPosition(m_pParent->GetWorldTransform().GetPosition() + m_localTransform.GetPosition());
 			}
 		}
 		m_positionIsDirty = false;
@@ -72,6 +73,8 @@ namespace dae
 
 	void GameObject::SetParent(GameObject* pNewParent, bool worldPositionStays)
 	{
+		assert(pNewParent != m_pParent && pNewParent != this);
+
 		if (m_pParent == nullptr)
 		{
 			SetLocalPosition(GetWorldTransform().GetPosition());
@@ -99,6 +102,7 @@ namespace dae
 
 		m_pParent = pNewParent;
 
+		//add this to the new parent
 		if (m_pParent)
 		{
 			auto& childrenVec = m_pParent->GetChildrenVector();
