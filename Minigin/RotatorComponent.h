@@ -8,7 +8,7 @@ namespace dae
 	{
 	public:
 
-		explicit RotatorComponent(GameObject* ownerPtr, const glm::vec3& rotPoint, float speed);
+		explicit RotatorComponent(GameObject* ownerPtr, float speed);
 		~RotatorComponent() override = default;
 
 		RotatorComponent(const RotatorComponent& other) = delete;
@@ -20,12 +20,9 @@ namespace dae
 		void Render() const override;
 
 		void SetLocalPosition(float x, float y) override;
-		void SetRotationPoint(float x, float y);
-		void SetRotationPoint(const glm::vec3& pos);
 
 	private:
 		Transform m_localTransform{};
-		glm::vec3 m_rotationPoint;
 		float m_speed;
 		float m_radius;
 		float m_angle;
