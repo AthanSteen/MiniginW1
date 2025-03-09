@@ -1,9 +1,5 @@
 #include <SDL.h>
-#include <SDL_syswm.h>
-#include "Windows.h"
 #include "InputManager.h"
-#include "imgui.h"
-#include "backends/imgui_impl_opengl3.h"
 #include "backends/imgui_impl_sdl2.h"
 
 namespace dae{
@@ -15,17 +11,20 @@ namespace dae{
 				return false;
 			}
 
-			if (e.type == SDL_KEYDOWN || e.type == SDL_KEYUP) {
-				const auto KEY = e.key.keysym.sym;
-				const auto STATE = (e.type == SDL_KEYDOWN) ? InputState::Pressed : InputState::Up;
-				if (m_KeyboardCommands.find(KEY) != m_KeyboardCommands.end() &&
-					m_KeyboardCommands[KEY].find(STATE) != m_KeyboardCommands[KEY].end()) {
-					m_KeyboardCommands[KEY][STATE]->Execute();
-				}
-			}
-
 			//process event for IMGUI
 			ImGui_ImplSDL2_ProcessEvent(&e);
+		}
+
+		const Uint8* state = SDL_GetKeyboardState(NULL);
+		for (auto& [key, commands] : m_KeyboardCommands) {
+			bool isPressed = state[SDL_GetScancodeFromKey(key)];
+			for (auto& [commandState, command] : commands) {
+				if ((commandState == InputState::Pressed && isPressed) ||
+					(commandState == InputState::Up && !isPressed) ||
+					(commandState == InputState::Down && isPressed)) {
+					command->Execute();
+				}
+			}
 		}
 
 		XINPUT_STATE controllerState;

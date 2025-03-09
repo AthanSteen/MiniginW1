@@ -167,7 +167,7 @@ namespace dae
     double PlotComponent::measure_time(std::vector<T>& buffer, int step) const
     {
         const auto start = std::chrono::high_resolution_clock::now();
-        for (int i = 0; i < buffer.size(); i += step) {
+        for (size_t i = 0; i < buffer.size(); i += step) {
             buffer[i].ID *= 2;
         }
         const auto end = std::chrono::high_resolution_clock::now();
@@ -179,7 +179,7 @@ namespace dae
     double PlotComponent::measure_time(std::vector<int>& buffer, int step) const
     {
         const auto start = std::chrono::high_resolution_clock::now();
-        for (int i = 0; i < buffer.size(); i += step) {
+        for (size_t i = 0; i < buffer.size(); i += step) {
             buffer[i] *= 2;
         }
         const auto end = std::chrono::high_resolution_clock::now();

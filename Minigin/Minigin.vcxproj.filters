@@ -22,6 +22,12 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{8950da8e-18d4-483d-b277-55d95b86b09a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Commands">
+      <UniqueIdentifier>{13dd9065-d57c-4685-b51a-bfc9ad41d85b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Commands">
+      <UniqueIdentifier>{a66cf134-3db7-4899-8d9d-cf00649d6420}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -102,14 +108,14 @@
     <ClInclude Include="PlotComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameActorCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputState.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Header Files\Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -195,10 +201,10 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Command.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="GameActorCommand.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Source Files\Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

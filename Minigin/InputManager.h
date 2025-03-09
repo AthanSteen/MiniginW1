@@ -1,4 +1,5 @@
 #pragma once
+#include "Windows.h"
 #include "Singleton.h"
 #include "Command.h"
 #include "InputState.h"
