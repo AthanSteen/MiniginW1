@@ -3,6 +3,8 @@
 #include "backends/imgui_impl_sdl2.h"
 
 namespace dae{
+	InputManager::InputManager() : m_XInputImpl(std::make_unique<XInputImpl>()) {}
+
 	bool InputManager::ProcessInput()
 	{
 		SDL_Event e;
@@ -26,30 +28,7 @@ namespace dae{
 				}
 			}
 		}
-
-		XINPUT_STATE controllerState;
-		for (DWORD i = 0; i < XUSER_MAX_COUNT; ++i) {
-			ZeroMemory(&controllerState, sizeof(XINPUT_STATE));
-			if (XInputGetState(i, &controllerState) == ERROR_SUCCESS) {
-				// Controller is connected
-				for (const auto& [button, commands] : m_ControllerCommands)
-				{
-					bool isPressed = (controllerState.Gamepad.wButtons & button) != 0;
-					bool wasPressed = (controllerState.Gamepad.wButtons & button) != 0;
-
-					for (const auto& [commandState, command] : commands)
-					{
-						if ((commandState == InputState::Down && isPressed) ||
-							(commandState == InputState::Up && !isPressed && wasPressed) ||
-							(commandState == InputState::Pressed && isPressed && wasPressed))
-						{
-							command->Execute();
-						}
-					}
-				}
-				m_PreviousState = controllerState;
-			}
-		}
+		m_XInputImpl->ProcessControllerInput(m_ControllerCommands);
 
 		return true;
 	}
