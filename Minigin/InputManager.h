@@ -18,6 +18,7 @@ namespace dae
 		void BindKeyboardCommand(int key, InputState state, Command* command);
 		void BindControllerCommand(WORD button, InputState state, Command* command);
     private:
+		Uint8* m_previousState;
         std::unordered_map<int, std::unordered_map<InputState, std::unique_ptr<Command>>> m_KeyboardCommands;
 		std::unique_ptr<XInputImpl> m_XInputImpl;
 	};

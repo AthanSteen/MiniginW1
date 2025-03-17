@@ -42,7 +42,10 @@ namespace dae{
 	};
 
 
-	InputManager::InputManager() : m_XInputImpl(std::make_unique<XInputImpl>()) {}
+	InputManager::InputManager() : m_XInputImpl(std::make_unique<XInputImpl>()) 
+	{
+		m_previousState = new Uint8[SDL_NUM_SCANCODES]();
+	}
 	InputManager::~InputManager() = default;
 
 	bool InputManager::ProcessInput()
@@ -57,17 +60,22 @@ namespace dae{
 			ImGui_ImplSDL2_ProcessEvent(&e);
 		}
 
-		const Uint8* state = SDL_GetKeyboardState(NULL);
+		const Uint8* currentState = SDL_GetKeyboardState(NULL);
+		if (!currentState) return true;
+
 		for (auto& [key, commands] : m_KeyboardCommands) {
-			bool isPressed = state[SDL_GetScancodeFromKey(key)];
+			bool isPressed = currentState[SDL_GetScancodeFromKey(key)];
+			bool wasPressed = m_previousState[SDL_GetScancodeFromKey(key)];
 			for (auto& [commandState, command] : commands) {
-				if ((commandState == InputState::Pressed && isPressed) ||
-					(commandState == InputState::Up && !isPressed) ||
-					(commandState == InputState::Down && isPressed)) {
+				if ((commandState == InputState::Down && isPressed && !wasPressed) ||
+					(commandState == InputState::Up && !isPressed && wasPressed) ||
+					(commandState == InputState::Pressed && isPressed)) {
 					command->Execute();
 				}
 			}
 		}
+
+		memcpy(m_previousState, currentState, SDL_NUM_SCANCODES * sizeof(Uint8));
 		m_XInputImpl->ProcessInput();
 		return true;
 	}
