@@ -34,9 +34,6 @@
     <Filter Include="Header Files\Observer">
       <UniqueIdentifier>{f3a8b831-f4f9-44e3-81fe-451e402aa039}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Event">
-      <UniqueIdentifier>{7082270d-0448-4399-af48-e72f0744ed10}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Observer">
       <UniqueIdentifier>{71f3680c-89ee-432a-b0fb-3baf6ecc41f9}</UniqueIdentifier>
     </Filter>
