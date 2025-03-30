@@ -32,8 +32,8 @@ namespace dae{
 			return true;
 		}
 
-		void BindControllerCommand(WORD button, InputState state, Command* command) {
-			m_ControllerCommands[button][state] = std::unique_ptr<Command>(command);
+		void BindControllerCommand(WORD button, InputState state, std::unique_ptr<Command> command) {
+			m_ControllerCommands[button][state] = std::move(command);
 		}
 
 	private:
@@ -80,13 +80,13 @@ namespace dae{
 		return true;
 	}
 
-	void InputManager::BindKeyboardCommand(int key, InputState state, Command* command)
+	void InputManager::BindKeyboardCommand(int key, InputState state, std::unique_ptr<Command> command)
 	{
-		m_KeyboardCommands[key][state] = std::unique_ptr<Command>(command);
+		m_KeyboardCommands[key][state] = std::move(command);
 	}
 
-	void InputManager::BindControllerCommand(WORD button, InputState state, Command* command)
+	void InputManager::BindControllerCommand(WORD button, InputState state, std::unique_ptr<Command> command)
 	{
-		m_XInputImpl.get()->BindControllerCommand(button, state, command);
+		m_XInputImpl.get()->BindControllerCommand(button, state, std::move(command));
 	}
 }

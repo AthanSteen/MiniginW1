@@ -15,8 +15,8 @@ namespace dae
 		InputManager();
 		~InputManager();
 		bool ProcessInput();
-		void BindKeyboardCommand(int key, InputState state, Command* command);
-		void BindControllerCommand(WORD button, InputState state, Command* command);
+		void BindKeyboardCommand(int key, InputState state, std::unique_ptr<Command> command);
+		void BindControllerCommand(WORD button, InputState state, std::unique_ptr<Command> command);
     private:
 		Uint8* m_previousState;
         std::unordered_map<int, std::unordered_map<InputState, std::unique_ptr<Command>>> m_KeyboardCommands;
