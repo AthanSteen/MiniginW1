@@ -1,4 +1,5 @@
 #pragma once
+#include "ServiceLocator.h"
 class Command {
 public:
 	virtual ~Command() = default;

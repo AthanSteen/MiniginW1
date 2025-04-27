@@ -44,7 +44,7 @@ void PrintSDLVersion()
 		version.major, version.minor, version.patch);
 }
 
-dae::Minigin::Minigin(const std::string &dataPath)
+dae::Minigin::Minigin()
 {
 	PrintSDLVersion();
 	
@@ -68,7 +68,7 @@ dae::Minigin::Minigin(const std::string &dataPath)
 
 	Renderer::GetInstance().Init(g_window);
 
-	ResourceManager::GetInstance().Init(dataPath);
+	ResourceManager::GetInstance().Init();
 }
 
 dae::Minigin::~Minigin()

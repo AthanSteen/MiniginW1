@@ -25,9 +25,6 @@
     <Filter Include="Header Files\Commands">
       <UniqueIdentifier>{13dd9065-d57c-4685-b51a-bfc9ad41d85b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Commands">
-      <UniqueIdentifier>{a66cf134-3db7-4899-8d9d-cf00649d6420}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Event">
       <UniqueIdentifier>{e0a77de0-186f-4ca3-bada-6a03d772de4d}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,12 @@
     </Filter>
     <Filter Include="Source Files\Observer">
       <UniqueIdentifier>{71f3680c-89ee-432a-b0fb-3baf6ecc41f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sound">
+      <UniqueIdentifier>{3a14b46c-7af8-441b-a331-2e795ada56d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sound">
+      <UniqueIdentifier>{01a17c53-5d66-4e78-9859-1a16be2a6396}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,16 +75,7 @@
     <ClInclude Include="Minigin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FPSComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="TextureComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="RotatorComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdParty\imgui\imconfig.h">
@@ -114,20 +108,11 @@
     <ClInclude Include="..\3rdParty\imgui\implot_internal.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="PlotComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="InputState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
       <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveCommand.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="LivesComponent.h">
-      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
       <Filter>Header Files\Observer</Filter>
@@ -138,20 +123,8 @@
     <ClInclude Include="Subject.h">
       <Filter>Header Files\Observer</Filter>
     </ClInclude>
-    <ClInclude Include="LivesDisplayObserver.h">
-      <Filter>Header Files\Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="KillCommand.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreDisplayObserver.h">
-      <Filter>Header Files\Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="AddScoreCommand.h">
-      <Filter>Header Files\Commands</Filter>
+    <ClInclude Include="SoundService.h">
+      <Filter>Header Files\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -182,25 +155,13 @@
     <ClCompile Include="Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Minigin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Component.h">
       <Filter>Header Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="FPSComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="TextureComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TextComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="RotatorComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui\imgui.cpp">
@@ -233,32 +194,17 @@
     <ClCompile Include="..\3rdParty\imgui\implot_items.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="PlotComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="LivesComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Subject.cpp">
       <Filter>Source Files\Observer</Filter>
     </ClCompile>
-    <ClCompile Include="LivesDisplayObserver.cpp">
-      <Filter>Source Files\Observer</Filter>
+    <ClCompile Include="ServiceLocator.h">
+      <Filter>Header Files\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="KillCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
+    <ClCompile Include="SDLMixerSoundService.h">
+      <Filter>Header Files\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreDisplayObserver.cpp">
-      <Filter>Source Files\Observer</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="AddScoreCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
+    <ClCompile Include="SDLMixerSoundService.cpp">
+      <Filter>Source Files\Sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

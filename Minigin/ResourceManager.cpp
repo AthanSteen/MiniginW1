@@ -8,10 +8,8 @@
 
 namespace fs = std::filesystem;
 
-void dae::ResourceManager::Init(const std::filesystem::path& dataPath)
+void dae::ResourceManager::Init()
 {
-	m_dataPath = dataPath;
-
 	if (TTF_Init() != 0)
 	{
 		throw std::runtime_error(std::string("Failed to load support for fonts: ") + SDL_GetError());
@@ -20,20 +18,21 @@ void dae::ResourceManager::Init(const std::filesystem::path& dataPath)
 
 std::shared_ptr<dae::Texture2D> dae::ResourceManager::LoadTexture(const std::string& file)
 {
-	const auto fullPath = m_dataPath/file;
-	const auto filename = fs::path(fullPath).filename().string();
-	if(m_loadedTextures.find(filename) == m_loadedTextures.end())
-		m_loadedTextures.insert(std::pair(filename,std::make_shared<Texture2D>(fullPath.string())));
-	return m_loadedTextures.at(filename);
+	if (!m_loadedTextures.contains(file))
+	{
+		m_loadedTextures.insert(std::pair(file, std::make_shared<Texture2D>(file)));
+	}
+	return m_loadedTextures.at(file);
 }
 
 std::shared_ptr<dae::Font> dae::ResourceManager::LoadFont(const std::string& file, uint8_t size)
 {
-	const auto fullPath = m_dataPath/file;
-	const auto filename = fs::path(fullPath).filename().string();
-	const auto key = std::pair<std::string, uint8_t>(filename, size);
-	if(m_loadedFonts.find(key) == m_loadedFonts.end())
-		m_loadedFonts.insert(std::pair(key,std::make_shared<Font>(fullPath.string(), size)));
+	const auto key = std::pair<std::string, uint8_t>(file, size);
+
+	if (!m_loadedFonts.contains(key))
+	{
+		m_loadedFonts.insert(std::pair(key, std::make_shared<Font>(file, size)));
+	}
 	return m_loadedFonts.at(key);
 }
 
