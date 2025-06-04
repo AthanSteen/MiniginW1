@@ -46,7 +46,11 @@ namespace dae{
 	{
 		m_previousState = new Uint8[SDL_NUM_SCANCODES]();
 	}
-	InputManager::~InputManager() = default;
+	InputManager::~InputManager()
+	{
+		delete[] m_previousState;
+		m_previousState = nullptr;
+	}
 
 	bool InputManager::ProcessInput()
 	{

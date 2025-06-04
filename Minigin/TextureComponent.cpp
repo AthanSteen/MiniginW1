@@ -3,6 +3,7 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "GameObject.h"
+#include <iostream>
 
 namespace dae
 {
@@ -22,13 +23,35 @@ namespace dae
 		if (m_texture)
 		{
 			const auto& pos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();
-			Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
+			if (m_srcRect)
+			{
+				Renderer::GetInstance().RenderTexture(*m_texture, m_srcRect.get(), pos.x, pos.y);
+			}
+			else
+			{
+				Renderer::GetInstance().RenderTexture(*m_texture, nullptr, pos.x, pos.y);
+			}
 		}
 	}
 
-	void TextureComponent::SetTexture(const std::string& filename)
+	void TextureComponent::SetTexture(const std::string& filename, const SDL_Rect* srcRect)
 	{
-		m_texture = ResourceManager::GetInstance().LoadTexture(filename);
+		auto texture = ResourceManager::GetInstance().LoadTexture(filename);
+		if (!texture)
+		{
+			std::cerr << "Failed to load texture: " << filename << std::endl;
+			return;
+		}
+		m_texture = texture;
+
+		if (srcRect)
+		{
+			m_srcRect = std::make_unique<SDL_Rect>(*srcRect);
+		}
+		else
+		{
+			m_srcRect = nullptr;
+		}
 	}
 
 	void TextureComponent::SetLocalPosition(float x, float y)
