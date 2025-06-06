@@ -25,9 +25,6 @@
     <Filter Include="Header Files\Commands">
       <UniqueIdentifier>{13dd9065-d57c-4685-b51a-bfc9ad41d85b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Event">
-      <UniqueIdentifier>{e0a77de0-186f-4ca3-bada-6a03d772de4d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Observer">
       <UniqueIdentifier>{f3a8b831-f4f9-44e3-81fe-451e402aa039}</UniqueIdentifier>
     </Filter>
@@ -119,9 +116,6 @@
     </ClInclude>
     <ClInclude Include="Observer.h">
       <Filter>Header Files\Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files\Event</Filter>
     </ClInclude>
     <ClInclude Include="Subject.h">
       <Filter>Header Files\Observer</Filter>

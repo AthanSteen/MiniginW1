@@ -35,6 +35,7 @@
     <ClCompile Include="TextComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Minigin\Event.h" />
     <ClInclude Include="AddScoreCommand.h" />
     <ClInclude Include="FPSComponent.h" />
     <ClInclude Include="GameActorCommand.h" />

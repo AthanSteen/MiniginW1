@@ -11,7 +11,7 @@ public:
 
 	void Update(float dt);
 	void HandleInput();
-	void ChangeState(State<PlayerState>* newState);
+	void ChangeState(std::unique_ptr<State<PlayerState>> newState);
 
 	dae::SpriteSheetComponent* GetSpriteSheet() const { return m_pTexture; };
 
@@ -20,7 +20,7 @@ private:
 	dae::SpriteSheetComponent* m_pTexture;
 };
 
-class IdleState : public State<PlayerState>
+class IdleState final : public State<PlayerState>
 {
 public:
 	void Enter(PlayerState* playerState) override;
@@ -29,7 +29,7 @@ public:
 	void HandleInput(PlayerState* playerState) override;
 };
 
-class WalkingState : public State<PlayerState>
+class WalkingState final : public State<PlayerState>
 {
 public:
 	void Enter(PlayerState* playerState) override;
@@ -38,7 +38,7 @@ public:
 	void HandleInput(PlayerState* playerState) override;
 };
 
-class ClimbingState : public State<PlayerState>
+class ClimbingState final : public State<PlayerState>
 {
 public:
 	void Enter(PlayerState* playerState) override;
@@ -47,7 +47,7 @@ public:
 	void HandleInput(PlayerState* playerState) override;
 };
 
-class SprayState : public State<PlayerState>
+class SprayState final : public State<PlayerState>
 {
 public:
 	void Enter(PlayerState* playerState) override;
@@ -56,7 +56,7 @@ public:
 	void HandleInput(PlayerState* playerState) override;
 };
 
-class HitState : public State<PlayerState>
+class HitState final : public State<PlayerState>
 {
 public:
 	void Enter(PlayerState* playerState) override;
@@ -65,7 +65,7 @@ public:
 	void HandleInput(PlayerState* playerState) override;
 };
 
-class DeadState : public State<PlayerState>
+class DeadState final : public State<PlayerState>
 {
 public:
 	void Enter(PlayerState* playerState) override;
@@ -74,7 +74,7 @@ public:
 	void HandleInput(PlayerState* playerState) override;
 };
 
-class RespawnState : public State<PlayerState>
+class RespawnState final : public State<PlayerState>
 {
 public:
 	void Enter(PlayerState* playerState) override;
@@ -83,7 +83,7 @@ public:
 	void HandleInput(PlayerState* playerState) override;
 };
 
-class WinningState : public State<PlayerState>
+class WinningState final : public State<PlayerState>
 {
 public:
 	void Enter(PlayerState* playerState) override;

@@ -1,9 +1,10 @@
 #include "PlayerState.h"
 
-PlayerState::PlayerState(dae::SpriteSheetComponent* spriteSheet) : m_StateMachine(std::make_unique<StateMachine<PlayerState>>()),
-m_pTexture(spriteSheet)
+PlayerState::PlayerState(dae::SpriteSheetComponent* spriteSheet) 
+	: m_StateMachine(std::make_unique<StateMachine<PlayerState>>()),
+	m_pTexture(spriteSheet)
 {
-	m_StateMachine->ChangeState(this, new IdleState());
+	m_StateMachine->ChangeState(std::make_unique<IdleState>());
 }
 
 void PlayerState::Update(float dt) {
@@ -14,8 +15,8 @@ void PlayerState::HandleInput() {
     m_StateMachine->HandleInput(this);
 }
 
-void PlayerState::ChangeState(State<PlayerState>* newState) {
-    m_StateMachine->ChangeState(this, newState);
+void PlayerState::ChangeState(std::unique_ptr<State<PlayerState>> newState) {
+    m_StateMachine->ChangeState(std::move(newState));
 }
 
 
@@ -25,20 +26,16 @@ void IdleState::Enter(PlayerState* playerState) {
 	playerState->GetSpriteSheet()->SetSpriteSheet("PPIdle.png");
 }
 
-void IdleState::Exit(PlayerState* playerState) {
+void IdleState::Exit(PlayerState*) {
 	// Cleanup idle state
-	(void)playerState;
 }
 
-void IdleState::Update(PlayerState* playerState, float dt) {
+void IdleState::Update(PlayerState*, float) {
 	// Update idle state
-	(void)playerState;
-	(void)dt;
 }
 
-void IdleState::HandleInput(PlayerState* playerState) {
+void IdleState::HandleInput(PlayerState*) {
 	// Handle input for idle state
-	(void)playerState;
 }
 #pragma endregion
 
@@ -48,20 +45,16 @@ void WalkingState::Enter(PlayerState* playerState) {
 	playerState->GetSpriteSheet()->SetSpriteSheet("PPLeft.png");
 }
 
-void WalkingState::Exit(PlayerState* playerState) {
+void WalkingState::Exit(PlayerState*) {
 	// Cleanup walking state
-	(void)playerState;
 }
 
-void WalkingState::Update(PlayerState* playerState, float dt) {
+void WalkingState::Update(PlayerState*, float) {
 	// Update walking state
-	(void)playerState;
-	(void)dt;
 }
 
-void WalkingState::HandleInput(PlayerState* playerState) {
+void WalkingState::HandleInput(PlayerState*) {
 	// Handle input for walking state
-	(void)playerState;
 }
 #pragma endregion
 
@@ -70,43 +63,34 @@ void ClimbingState::Enter(PlayerState* playerState) {
 	playerState->GetSpriteSheet()->SetSpriteSheet("PPUp.png");
 }
 
-void ClimbingState::Exit(PlayerState* playerState) {
+void ClimbingState::Exit(PlayerState*) {
 	// Cleanup climbing state
-	(void)playerState;
 }
 
-void ClimbingState::Update(PlayerState* playerState, float dt) {
+void ClimbingState::Update(PlayerState*, float) {
 	// Update climbing state
-	(void)playerState;
-	(void)dt;
 }
 
-void ClimbingState::HandleInput(PlayerState* playerState) {
+void ClimbingState::HandleInput(PlayerState*) {
 	// Handle input for climbing state
-	(void)playerState;
 }
 #pragma endregion
 
 #pragma region Spray
-void SprayState::Enter(PlayerState* playerState) {
+void SprayState::Enter(PlayerState*) {
 	// Initialize spray state
-	(void)playerState;
 }
 
-void SprayState::Exit(PlayerState* playerState) {
+void SprayState::Exit(PlayerState*) {
 	// Cleanup spray state
-	(void)playerState;
 }
 
-void SprayState::Update(PlayerState* playerState, float dt) {
+void SprayState::Update(PlayerState*, float) {
 	// Update spray state
-	(void)playerState;
-	(void)dt;
 }
 
-void SprayState::HandleInput(PlayerState* playerState) {
+void SprayState::HandleInput(PlayerState*) {
 	// Handle input for spray state
-	(void)playerState;
 }
 #pragma endregion
 
@@ -115,20 +99,16 @@ void HitState::Enter(PlayerState* playerState) {
 	playerState->GetSpriteSheet()->SetSpriteSheet("PPHit.png");
 }
 
-void HitState::Exit(PlayerState* playerState) {
+void HitState::Exit(PlayerState*) {
 	// Cleanup hit state
-	(void)playerState;
 }
 
-void HitState::Update(PlayerState* playerState, float dt) {
+void HitState::Update(PlayerState*, float) {
 	// Update hit state
-	(void)playerState;
-	(void)dt;
 }
 
-void HitState::HandleInput(PlayerState* playerState) {
+void HitState::HandleInput(PlayerState*) {
 	// Handle input for hit state
-	(void)playerState;
 }
 #pragma endregion
 
@@ -137,20 +117,16 @@ void DeadState::Enter(PlayerState* playerState) {
 	playerState->GetSpriteSheet()->SetSpriteSheet("PPDead.png");
 }
 
-void DeadState::Exit(PlayerState* playerState) {
+void DeadState::Exit(PlayerState*) {
 	// Cleanup hit state
-	(void)playerState;
 }
 
-void DeadState::Update(PlayerState* playerState, float dt) {
+void DeadState::Update(PlayerState*, float) {
 	// Update hit state
-	(void)playerState;
-	(void)dt;
 }
 
-void DeadState::HandleInput(PlayerState* playerState) {
+void DeadState::HandleInput(PlayerState*) {
 	// Handle input for hit state
-	(void)playerState;
 }
 #pragma endregion
 
@@ -159,20 +135,16 @@ void RespawnState::Enter(PlayerState* playerState) {
 	playerState->GetSpriteSheet()->SetSpriteSheet("PPIdle.png");
 }
 
-void RespawnState::Exit(PlayerState* playerState) {
+void RespawnState::Exit(PlayerState*) {
 	// Cleanup respawn state
-	(void)playerState;
 }
 
-void RespawnState::Update(PlayerState* playerState, float dt) {
+void RespawnState::Update(PlayerState*, float) {
 	// Update respawn state
-	(void)playerState;
-	(void)dt;
 }
 
-void RespawnState::HandleInput(PlayerState* playerState) {
+void RespawnState::HandleInput(PlayerState*) {
 	// Handle input for respawn state
-	(void)playerState;
 }
 #pragma endregion
 
@@ -180,17 +152,13 @@ void RespawnState::HandleInput(PlayerState* playerState) {
 void WinningState::Enter(PlayerState* playerState) {
 	playerState->GetSpriteSheet()->SetSpriteSheet("PPWin.png");
 }
-void WinningState::Exit(PlayerState* playerState) {
+void WinningState::Exit(PlayerState*) {
 	// Cleanup winning state
-	(void)playerState;
 }
-void WinningState::Update(PlayerState* playerState, float dt) {
+void WinningState::Update(PlayerState*, float) {
 	// Update winning state
-	(void)playerState;
-	(void)dt;
 }
-void WinningState::HandleInput(PlayerState* playerState) {
+void WinningState::HandleInput(PlayerState*) {
 	// Handle input for winning state
-	(void)playerState;
 }
 #pragma endregion

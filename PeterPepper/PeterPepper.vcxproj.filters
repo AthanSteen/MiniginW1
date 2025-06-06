@@ -31,6 +31,9 @@
     <Filter Include="Header Files\Observer">
       <UniqueIdentifier>{4cd52d00-b50e-4f65-92fc-d86de2d0decc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Event">
+      <UniqueIdentifier>{68a8b6ea-9d0b-46b6-be8a-54974d05ec2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="PlayerComponent.h">
       <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Minigin\Event.h">
+      <Filter>Header Files\Event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
