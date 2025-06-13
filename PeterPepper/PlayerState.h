@@ -29,6 +29,7 @@ public:
 	void HandleInput(PlayerState* playerState) override;
 };
 
+class PlayerComponent;
 class WalkingState final : public State<PlayerState>
 {
 public:
@@ -36,6 +37,8 @@ public:
 	void Exit(PlayerState* playerState) override;
 	void Update(PlayerState* playerState, float dt) override;
 	void HandleInput(PlayerState* playerState) override;
+private:
+	PlayerComponent* m_playerComp = nullptr; // Pointer to PlayerComponent for walking state
 };
 
 class ClimbingState final : public State<PlayerState>

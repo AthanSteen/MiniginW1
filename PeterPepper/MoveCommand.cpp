@@ -1,4 +1,5 @@
 #include "MoveCommand.h"
+#include "PlayerComponent.h"
 
 namespace dae
 {
@@ -16,6 +17,12 @@ namespace dae
             glm::vec3 pos{ m_pObject->GetWorldTransform().GetPosition() };
             glm::vec3 offset(m_direction, 0.f);
             m_pObject->SetLocalPosition( pos + offset * m_speed);
+
+            auto* playerComp = m_pObject->GetComponent<PlayerComponent>();
+            if (playerComp)
+            {
+                playerComp->SetDirection(m_direction);
+            }
         }
     }
 }

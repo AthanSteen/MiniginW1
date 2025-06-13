@@ -20,9 +20,10 @@ namespace dae
         virtual void SetLocalPosition(float x, float y) = 0;
         virtual void Destroy() { m_markedToDestroy = true; }
 		virtual bool IsMarkedToDestroy() const { return m_markedToDestroy; }
+        
+        GameObject* GetOwner() const { return m_pOwner; } // moved from protected
     protected:
         explicit Component(GameObject* pOwner) : m_pOwner(pOwner), m_markedToDestroy(false) {}
-        GameObject* GetOwner() const { return m_pOwner; }
     private:
         GameObject* m_pOwner;
         bool m_markedToDestroy;

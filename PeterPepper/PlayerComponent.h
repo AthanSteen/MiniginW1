@@ -11,7 +11,11 @@ public:
     void Render() const override;
     void SetLocalPosition(float x, float y) override;
 
+    void SetDirection(const glm::vec2& direction);
+	const glm::vec2& GetDirection() const { return m_direction; }
+
 private:
-    PlayerState m_PlayerState;
 	std::unique_ptr<dae::SpriteSheetComponent> m_pSpriteSheet;
+    PlayerState m_PlayerState;
+    glm::vec2 m_direction;
 };

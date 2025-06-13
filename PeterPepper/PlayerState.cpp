@@ -1,4 +1,6 @@
 #include "PlayerState.h"
+#include "PlayerComponent.h"
+#include "GameObject.h"
 
 PlayerState::PlayerState(dae::SpriteSheetComponent* spriteSheet) 
 	: m_StateMachine(std::make_unique<StateMachine<PlayerState>>()),
@@ -41,16 +43,41 @@ void IdleState::HandleInput(PlayerState*) {
 
 #pragma region Walking
 void WalkingState::Enter(PlayerState* playerState) {
-	//TODO switch logic for direction
-	playerState->GetSpriteSheet()->SetSpriteSheet("PPLeft.png");
+
+	// Get the owner GameObject from the SpriteSheetComponent
+	auto* owner = playerState->GetSpriteSheet()->GetOwner();
+	if (!owner) return;
+
+	// Get the PlayerComponent from the GameObject
+	auto* playerComp = owner->GetComponent<PlayerComponent>();
+	if (!playerComp) return;
+	m_playerComp = playerComp;
 }
 
 void WalkingState::Exit(PlayerState*) {
 	// Cleanup walking state
 }
 
-void WalkingState::Update(PlayerState*, float) {
+void WalkingState::Update(PlayerState* playerState, float) {
 	// Update walking state
+	if (m_playerComp)
+	{
+
+		// Get the velocity
+		const auto& vel = m_playerComp->GetDirection();
+
+		// Assign the correct sprite sheet based on direction
+		if (vel.x > 0)
+			playerState->GetSpriteSheet()->SetSpriteSheet("PPRight.png");
+		else if (vel.x < 0)
+			playerState->GetSpriteSheet()->SetSpriteSheet("PPLeft.png");
+		else if (vel.y < 0)
+			playerState->GetSpriteSheet()->SetSpriteSheet("PPUp.png");
+		else if (vel.y > 0)
+			playerState->GetSpriteSheet()->SetSpriteSheet("PPDown.png");
+		else
+			playerState->ChangeState(std::make_unique<IdleState>());
+	}
 }
 
 void WalkingState::HandleInput(PlayerState*) {

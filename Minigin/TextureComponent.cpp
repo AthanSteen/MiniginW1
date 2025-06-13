@@ -13,9 +13,9 @@ namespace dae
 		SetTexture(filename);
 	}
 
-	void TextureComponent::Update(float deltaTime)
+	void TextureComponent::Update(float)
 	{
-		(void)deltaTime;
+
 	}
 
 	void TextureComponent::Render() const
@@ -44,13 +44,13 @@ namespace dae
 		}
 		m_texture = texture;
 
-		if (srcRect)
+		if (srcRect == nullptr)
 		{
-			m_srcRect = std::make_unique<SDL_Rect>(*srcRect);
+			m_srcRect = nullptr;
 		}
 		else
 		{
-			m_srcRect = nullptr;
+			m_srcRect = std::make_unique<SDL_Rect>(*srcRect);
 		}
 	}
 

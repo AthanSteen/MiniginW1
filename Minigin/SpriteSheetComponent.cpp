@@ -2,62 +2,107 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "GameObject.h"
+#include "iostream"
 
 namespace dae
 {
     SpriteSheetComponent::SpriteSheetComponent(GameObject* ownerPtr, const std::string& filename, int spriteWidth, float frameTime)
-        : TextureComponent(ownerPtr, filename)
-        , m_SpriteWidth(spriteWidth)
-        , m_FrameTime(frameTime)
-        , m_ElapsedTime(0.0f)
-        , m_CurrentFrame(0)
+		: Component(ownerPtr)
+        , m_spriteWidth(spriteWidth)
+        , m_frameTime(frameTime)
+		, m_elapsedTime(0.0f)
+		, m_currentFrame(0)
+		, m_localTransform()
     {
-        const auto textureSize = GetTexture()->GetSize();
-        m_TotalFrames = textureSize.x / m_SpriteWidth;
+        m_texture = ResourceManager::GetInstance().LoadTexture(filename);
+
+        CalculateTotalFrames();
     }
 
     void SpriteSheetComponent::Update(float deltaTime)
     {
-        m_ElapsedTime += deltaTime;
+        m_elapsedTime += deltaTime;
 
-        if (m_ElapsedTime >= m_FrameTime)
+        if (m_elapsedTime >= m_frameTime)
         {
-            m_ElapsedTime -= m_FrameTime;
-            m_CurrentFrame = (m_CurrentFrame + 1) % m_TotalFrames;
+            m_elapsedTime -= m_frameTime;
+            m_currentFrame = (m_currentFrame + 1) % m_totalFrames;
         }
-		dae::TextureComponent::Update(deltaTime);
     }
 
     void SpriteSheetComponent::Render() const
     {
-        dae::TextureComponent::Render();
+        if (!m_texture) return;
+
+        SDL_Rect srcRect{};
+        srcRect.x = m_currentFrame * m_spriteWidth;
+        srcRect.y = 0;
+        srcRect.w = m_spriteWidth;
+        srcRect.h = m_texture->GetSize().y;
+
+        const auto pos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();
+        Renderer::GetInstance().RenderTexture(*m_texture, &srcRect, pos.x, pos.y);
     }
 
-	void SpriteSheetComponent::SetSpriteSheet(const std::string& filename, const SDL_Rect* srcRect)
+	void SpriteSheetComponent::SetSpriteSheet(const std::string& filename)
 	{
-		TextureComponent::SetTexture(filename, srcRect);
+		auto test = ResourceManager::GetInstance().LoadTexture(filename);
+		auto idk = test.use_count();
+        if(idk > 1 && m_texture == test)
+        {
+            std::cout << "SpriteSheetComponent: Texture already loaded, use existing texture.\n";
+            return;
+        }
+        m_texture.reset();
+        m_texture = test;
+        if (!m_texture)
+        {
+            std::cout << "SpriteSheetComponent: Failed to load texture: " << filename << "\n";
+            m_totalFrames = 0;
+            return;
+        }
 
-        const auto textureSize = GetTexture()->GetSize();
-		m_TotalFrames = textureSize.x / m_SpriteWidth;
+        CalculateTotalFrames();
 	}
 
     void SpriteSheetComponent::SetSpriteWidth(int spriteWidth)
     {
-        m_SpriteWidth = spriteWidth;
-        const auto textureSize = GetTexture()->GetSize();
-        m_TotalFrames = textureSize.x / m_SpriteWidth;
+        m_spriteWidth = spriteWidth;
+
+        CalculateTotalFrames();
     }
 
     void SpriteSheetComponent::SetFrameTime(float frameTime)
     {
-        m_FrameTime = frameTime;
+        m_frameTime = frameTime;
     }
 
     void SpriteSheetComponent::SetCurrentFrame(int frame)
     {
-        if (frame >= 0 && frame < m_TotalFrames)
+        if (frame >= 0 && frame < m_totalFrames)
         {
-            m_CurrentFrame = frame;
+            m_currentFrame = frame;
         }
+    }
+
+    void SpriteSheetComponent::CalculateTotalFrames()
+    {
+		if (!m_texture)
+		{
+			std::cout << "Texture not initialized.\n";
+			return;
+		}
+
+		const auto size = m_texture->GetSize();
+		m_totalFrames = size.x / m_spriteWidth;
+		if (m_totalFrames <= 0)
+		{
+			std::cout << "SpriteSheetComponent: Invalid sprite width or texture size.\n";
+		}
+    }
+
+    void SpriteSheetComponent::SetLocalPosition(float x, float y)
+    {
+        m_localTransform.SetPosition(x, y, 0.0f);
     }
 }

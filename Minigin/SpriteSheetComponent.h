@@ -4,7 +4,7 @@
 
 namespace dae
 {
-    class SpriteSheetComponent : public TextureComponent
+    class SpriteSheetComponent : public Component
     {
     public:
         explicit SpriteSheetComponent(GameObject* ownerPtr, const std::string& filename, int spriteWidth, float frameTime);
@@ -17,17 +17,22 @@ namespace dae
         void Update(float deltaTime) override;
         void Render() const override;
 
-		void SetSpriteSheet(const std::string& filename, const SDL_Rect* srcRect = nullptr);
+		void SetSpriteSheet(const std::string& filename);
         void SetSpriteWidth(int spriteWidth);
         void SetFrameTime(float frameTime);
         void SetCurrentFrame(int frame);
 
-        std::shared_ptr<Texture2D> GetTexture() const { return m_texture; }
+		void SetLocalPosition(float x, float y) override;
     private:
-        int m_SpriteWidth;
-        float m_FrameTime;
-        float m_ElapsedTime;
-        int m_CurrentFrame;
-        int m_TotalFrames;
+		void CalculateTotalFrames(); 
+        std::shared_ptr<Texture2D> m_texture;
+
+        int m_spriteWidth;
+        float m_frameTime;
+        float m_elapsedTime;
+        int m_currentFrame;
+        int m_totalFrames;
+        Transform m_localTransform;
+
     };
 }

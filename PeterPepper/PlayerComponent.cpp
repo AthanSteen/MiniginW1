@@ -26,3 +26,19 @@ void PlayerComponent::SetLocalPosition(float x, float y)
     // Delegate the position setting to the GameObject's transform
     GetOwner()->SetLocalPosition(x, y);
 }
+
+
+void PlayerComponent::SetDirection(const glm::vec2& direction)
+{
+	if (m_direction == direction)
+		return;
+	m_direction = direction;
+	/*if (m_direction.x != 0 || m_direction.y != 0)
+	{
+		m_PlayerState.ChangeState(std::make_unique<WalkingState>());
+	}
+	else
+	{
+		m_PlayerState.ChangeState(std::make_unique<IdleState>());
+	}*/
+}

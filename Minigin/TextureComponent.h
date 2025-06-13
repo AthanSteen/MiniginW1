@@ -23,8 +23,9 @@ namespace dae
         void SetLocalPosition(float x, float y) override;
 
         void SetTexture(const std::string& filename, const SDL_Rect* srcRect = nullptr);   
+        std::shared_ptr<Texture2D> GetTexture() const { return m_texture; }
 
-    protected:
+    private:
         Transform m_localTransform{};
         std::shared_ptr<Texture2D> m_texture;
 		std::unique_ptr<SDL_Rect> m_srcRect;
