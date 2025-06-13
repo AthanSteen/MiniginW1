@@ -40,6 +40,12 @@
     <Filter Include="Source Files\Level">
       <UniqueIdentifier>{c6707b46-3599-4dfc-8e60-80fce701d821}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Level\GameObjects">
+      <UniqueIdentifier>{cdf8f2ca-f83a-4e47-a822-8c99645efe49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Level\GameObjects">
+      <UniqueIdentifier>{34b610bf-2d8b-46a4-b688-75d9b954688e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -91,7 +97,16 @@
       <Filter>Source Files\Level</Filter>
     </ClCompile>
     <ClCompile Include="LevelLoader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform.cpp">
+      <Filter>Source Files\Level\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Ladder.cpp">
+      <Filter>Source Files\Level\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BurgerPiece.cpp">
+      <Filter>Source Files\Level\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,7 +159,16 @@
       <Filter>Header Files\Level</Filter>
     </ClInclude>
     <ClInclude Include="LevelLoader.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="BurgerPiece.h">
+      <Filter>Header Files\Level\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Ladder.h">
+      <Filter>Header Files\Level\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>Header Files\Level\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

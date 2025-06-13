@@ -40,6 +40,12 @@
     <Filter Include="Header Files\State">
       <UniqueIdentifier>{eac9276f-790a-4417-87ca-666b61ccd917}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\external">
+      <UniqueIdentifier>{d83d26cd-8d21-42ee-8b76-41ce30b4399a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\external\nlohmann">
+      <UniqueIdentifier>{946e0cc1-fc51-47d9-b89c-193f3751e2e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -128,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="SpriteSheetComponent.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Header Files\external\nlohmann</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
