@@ -13,9 +13,10 @@ namespace dae
 		, m_elapsedTime(0.0f)
 		, m_currentFrame(0)
 		, m_localTransform()
+        , m_mirrorToRight()
     {
         m_texture = ResourceManager::GetInstance().LoadTexture(filename);
-
+           
         CalculateTotalFrames();
     }
 
@@ -27,6 +28,8 @@ namespace dae
         {
             m_elapsedTime -= m_frameTime;
             m_currentFrame = (m_currentFrame + 1) % m_totalFrames;
+
+            std::cout << std::endl << std::endl << m_currentFrame << std::endl << std::endl;
         }
     }
 
@@ -40,28 +43,30 @@ namespace dae
         srcRect.w = m_spriteWidth;
         srcRect.h = m_texture->GetSize().y;
 
+        const float w = static_cast<float>(srcRect.w);
+        const float h = static_cast<float>(srcRect.h);
+
         const auto pos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();
-        Renderer::GetInstance().RenderTexture(*m_texture, &srcRect, pos.x, pos.y);
+        Renderer::GetInstance().RenderTexture(*m_texture, &srcRect, pos.x, pos.y, w, h, m_mirrorToRight);
     }
 
 	void SpriteSheetComponent::SetSpriteSheet(const std::string& filename)
 	{
 		auto test = ResourceManager::GetInstance().LoadTexture(filename);
-		auto idk = test.use_count();
-        if(idk > 1 && m_texture == test)
-        {
-            std::cout << "SpriteSheetComponent: Texture already loaded, use existing texture.\n";
-            return;
-        }
-        m_texture.reset();
+		m_mirrorToRight = false;
+		if (m_texture->GetSDLTexture() == test->GetSDLTexture())
+		{
+			return;
+		}
         m_texture = test;
+        m_currentFrame = 0;
+        m_elapsedTime = 0.f;
         if (!m_texture)
         {
             std::cout << "SpriteSheetComponent: Failed to load texture: " << filename << "\n";
             m_totalFrames = 0;
             return;
         }
-
         CalculateTotalFrames();
 	}
 
@@ -100,7 +105,7 @@ namespace dae
 			std::cout << "SpriteSheetComponent: Invalid sprite width or texture size.\n";
 		}
     }
-
+      
     void SpriteSheetComponent::SetLocalPosition(float x, float y)
     {
         m_localTransform.SetPosition(x, y, 0.0f);

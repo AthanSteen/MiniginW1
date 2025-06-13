@@ -21,7 +21,24 @@ namespace dae
             auto* playerComp = m_pObject->GetComponent<PlayerComponent>();
             if (playerComp)
             {
-                playerComp->SetDirection(m_direction);
+                auto currentDirection = playerComp->GetDirection();
+
+                if (m_direction.x != 0.f)
+                {
+                    if (currentDirection.x == m_direction.x * -1)
+                        currentDirection.x = 0.f;
+                    else if (currentDirection.x != m_direction.x)
+                        currentDirection.x = m_direction.x;
+                }
+                else
+                {
+                    if (currentDirection.y == m_direction.y * -1)
+                        currentDirection.y = 0.f;
+                    else if (currentDirection.y != m_direction.y)
+                        currentDirection.y = m_direction.y;
+                }
+                //trying to fix correct image but now working
+                playerComp->SetDirection(currentDirection);
             }
         }
     }

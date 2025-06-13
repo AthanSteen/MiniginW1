@@ -58,17 +58,21 @@ void WalkingState::Exit(PlayerState*) {
 	// Cleanup walking state
 }
 
+#include "iostream"
 void WalkingState::Update(PlayerState* playerState, float) {
 	// Update walking state
 	if (m_playerComp)
 	{
-
 		// Get the velocity
 		const auto& vel = m_playerComp->GetDirection();
 
 		// Assign the correct sprite sheet based on direction
+		std::cout << "X: " << vel.x << "Y: " << vel.y << std::endl;
 		if (vel.x > 0)
-			playerState->GetSpriteSheet()->SetSpriteSheet("PPRight.png");
+		{
+			playerState->GetSpriteSheet()->SetSpriteSheet("PPLeft.png");
+			playerState->GetSpriteSheet()->SetMirror(true);
+		}
 		else if (vel.x < 0)
 			playerState->GetSpriteSheet()->SetSpriteSheet("PPLeft.png");
 		else if (vel.y < 0)

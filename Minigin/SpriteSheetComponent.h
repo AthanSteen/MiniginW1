@@ -22,6 +22,11 @@ namespace dae
         void SetFrameTime(float frameTime);
         void SetCurrentFrame(int frame);
 
+        void SetMirror(bool toRight = false)
+        {
+            m_mirrorToRight = toRight;
+        }
+
 		void SetLocalPosition(float x, float y) override;
     private:
 		void CalculateTotalFrames(); 
@@ -32,6 +37,7 @@ namespace dae
         float m_elapsedTime;
         int m_currentFrame;
         int m_totalFrames;
+        bool m_mirrorToRight;
         Transform m_localTransform;
 
     };

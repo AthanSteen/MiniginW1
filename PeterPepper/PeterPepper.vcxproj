@@ -23,6 +23,8 @@
     <ClCompile Include="FPSComponent.cpp" />
     <ClCompile Include="GameActorCommand.cpp" />
     <ClCompile Include="KillCommand.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
     <ClCompile Include="LivesDisplayObserver.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -32,6 +34,7 @@
     <ClCompile Include="RotatorComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="ScoreDisplayObserver.cpp" />
+    <ClCompile Include="StopMoveCommand.cpp" />
     <ClCompile Include="TextComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -40,6 +43,8 @@
     <ClInclude Include="FPSComponent.h" />
     <ClInclude Include="GameActorCommand.h" />
     <ClInclude Include="KillCommand.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="LivesDisplayObserver.h" />
     <ClInclude Include="MoveCommand.h" />
@@ -48,6 +53,7 @@
     <ClInclude Include="RotatorComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="ScoreDisplayObserver.h" />
+    <ClInclude Include="StopMoveCommand.h" />
     <ClInclude Include="TextComponent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
