@@ -44,6 +44,8 @@ namespace dae
         bool IsFullyStepped() const;
 		void ResetStepped();
 
+		bool IsOnPlate() const { return m_isOnPlate; }
+
         void Fall();
 
         void CheckAndSetStepped(const glm::vec2& playerPos, const glm::vec2& playerSize);
@@ -56,6 +58,7 @@ namespace dae
 		int m_scoreValue{ 100 };
 		bool m_stepped[4]{ false, false, false, false };
         bool m_isFalling;
+        bool m_isOnPlate;
 
         void OnLand();
         BurgerPiece* FindIngredientBelow();

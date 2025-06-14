@@ -106,6 +106,28 @@
       "bottomY": 72
     }
   ],
+  "plates": [
+    {
+      "startX": 31,
+      "endX": 63,
+      "y": 255
+    },
+    {
+      "startX": 91,
+      "endX": 123,
+      "y": 255
+    },
+    {
+      "startX": 151,
+      "endX": 183,
+      "y": 255
+    },
+    {
+      "startX": 211,
+      "endX": 243,
+      "y": 255
+    }
+  ],
   "burgerPieces": [
     { "type": "TopBun",     "position": { "x": 31, "y": 14 } },
     { "type": "Lettuce",    "position": { "x": 31, "y": 64 } },

@@ -4,6 +4,7 @@
 #include "BurgerPiece.h"
 #include "Ladder.h"
 #include "Platform.h"
+#include "Plate.h"
 #include <glm.hpp>
 #include <iostream>
 #include "json.hpp"
@@ -110,6 +111,39 @@ namespace dae
             {
                 std::cerr << "Warning: 'platforms' not found " << levelName << std::endl;
             }
+
+
+            if (data.contains("plates") && data["plates"].is_array())
+            {
+                for (const auto& p : data["plates"])
+                {
+                    if (p.is_object() && p.contains("startX") && p["startX"].is_number() &&
+                        p.contains("endX") && p["endX"].is_number() &&
+                        p.contains("y") && p["y"].is_number())
+                    {
+                        float startX = p["startX"].get<float>();
+                        float endX = p["endX"].get<float>();
+                        float y = p["y"].get<float>();
+                        float width = endX - startX;
+
+                        auto plate = std::make_unique<Plate>(m_pOwner);
+                        plate->SetLocalPosition(startX, y);
+                        plate->SetWidth(width);
+
+                        outLevel->AddPlatform(std::move(plate));
+                    }
+                    else
+                    {
+                        std::cerr << "Warning: platform entry (startX, endX, y missing or not numbers) in " << levelName << std::endl;
+                    }
+                }
+            }
+            else
+            {
+                std::cerr << "Warning: 'platforms' not found " << levelName << std::endl;
+            }
+
+
 
             if (data.contains("ladders") && data["ladders"].is_array())
             {

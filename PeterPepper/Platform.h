@@ -26,9 +26,10 @@ namespace dae
 		float GetWidth() const { return m_width; }
 
         bool IsOverlapping(const glm::vec2& playerPos, const glm::vec2& playerSize) const;
-    private:
+    protected:
         Transform m_localTransform;
-        std::shared_ptr<Texture2D> m_texture;
 		float m_width;
+    private:
+        std::shared_ptr<Texture2D> m_texture;
     };
 }

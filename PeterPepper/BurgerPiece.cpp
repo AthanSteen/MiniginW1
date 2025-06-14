@@ -4,6 +4,9 @@
 #include "collisionUtils.h"
 #include "Level.h"
 #include "iostream"
+#include "ServiceLocator.h"
+#include "SoundService.h"
+#include "Plate.h"
 
 namespace dae
 {
@@ -53,6 +56,8 @@ namespace dae
 					pos.y = platTop - mySize.y;
 					landed = true;
 					m_lastPlatform = platform;
+					if(dynamic_cast<Plate*>(platform))
+						m_isOnPlate = true;
 					break;
 				}
 			}
@@ -62,29 +67,41 @@ namespace dae
 			if (landed)
 			{
 				auto* below = FindIngredientBelow();
-				if (below)
-				{
+				if (below && !below->m_isFalling && !below->IsOnPlate()) {
 					below->Fall();
 				}
 				OnLand();
+			}
+
+
+			auto below = FindIngredientBelow();
+			if (below) {
+				if (below->m_isFalling)
+					return;
+				if (below->IsOnPlate())
+				{
+					m_isOnPlate = true;
+					m_isFalling = false;
+					ResetStepped();
+				}
+				else {
+					below->Fall();
+					ServiceLocator::GetSoundService()->PlaySound("Sound/BurgerLand.wav");
+				}
 			}
 		}
 	}
 	void BurgerPiece::Fall()
 	{
-		if (m_isFalling) return;
-			m_isFalling = true;
+		if (m_isFalling || m_isOnPlate) return;
+		m_isFalling = true;
+		ServiceLocator::GetSoundService()->PlaySound("Sound/BurgerFall.wav");
 	}
 
 	void BurgerPiece::OnLand() {
 		m_isFalling = false;
 		ResetStepped();
 		// TODO: Award score here (see next step)
-
-		auto below = FindIngredientBelow();
-		if (below && !below->m_isFalling) {
-			below->Fall();
-		}
 	}
 
 	BurgerPiece* BurgerPiece::FindIngredientBelow()
@@ -172,31 +189,24 @@ namespace dae
 		{
 			case BurgerPieceType::TopBun:
 				m_texture = ResourceManager::GetInstance().LoadTexture("Level/BurgerTopBun.png");
-				m_scoreValue = 100;
 				break;
 			case BurgerPieceType::Lettuce:
 				m_texture = ResourceManager::GetInstance().LoadTexture("Level/BurgerLettuce.png");
-				m_scoreValue = 100;
 				break;
 			case BurgerPieceType::Patty:
 				m_texture = ResourceManager::GetInstance().LoadTexture("Level/BurgerPatty.png");
-				m_scoreValue = 100;
 				break;
 			case BurgerPieceType::Tomato:
 				m_texture = ResourceManager::GetInstance().LoadTexture("Level/BurgerTomato.png");
-				m_scoreValue = 100;
 				break;
 			case BurgerPieceType::Cheese:
 				m_texture = ResourceManager::GetInstance().LoadTexture("Level/BurgerCheese.png");
-				m_scoreValue = 100;
 				break;
 			case BurgerPieceType::BottomBun:
 				m_texture = ResourceManager::GetInstance().LoadTexture("Level/BurgerBottomBun.png");
-				m_scoreValue = 100;
 				break;
 			default:
 				m_texture = ResourceManager::GetInstance().LoadTexture("Level/BurgerTopBun.png");
-				m_scoreValue = 100;
 				break;
 		}
 	}
@@ -231,8 +241,12 @@ namespace dae
 
 	void BurgerPiece::SetStepped(int part)
 	{
+		if(m_stepped[part])
+			return;
+
 		if (part >= 0 && part < 4) {
 			m_stepped[part] = true;
+			ServiceLocator::GetSoundService()->PlaySound("Sound/BurgerStep.wav");
 		}
 	}
 

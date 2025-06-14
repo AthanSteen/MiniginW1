@@ -111,6 +111,9 @@
     <ClCompile Include="collisionUtils.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Plate.cpp">
+      <Filter>Source Files\Level\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddScoreCommand.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="MuteCommands.h">
       <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Plate.h">
+      <Filter>Header Files\Level\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
