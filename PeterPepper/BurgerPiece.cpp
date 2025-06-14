@@ -17,20 +17,61 @@ namespace dae
 
     }
 
-    void BurgerPiece::Render() const
-    {
-		if (!m_texture) return;
 
-		SDL_Rect srcRect{};
-		srcRect.x = 0;
-		srcRect.y = 0;
-		srcRect.w = m_texture->GetSize().x;
-		srcRect.h = m_texture->GetSize().y;
-		const float w = static_cast<float>(srcRect.w);
-		const float h = static_cast<float>(srcRect.h);
+	void dae::BurgerPiece::Render() const
+	{
+		//TODO: Find proper way to calculate this
+		if (!m_texture) return;
+		const auto texSize = m_texture->GetSize();
+		const float partWidth = texSize.x / 4.0f;
+		const float w = partWidth;
+		const float h = static_cast<float>(texSize.y);
+
+		// Calculate offsets for each tile
+		int offsets[4] = { 0, 0, 0, 0 };
+
+		// First, give each stepped tile a base offset of 1
+		for (int i = 0; i < 4; ++i) {
+			offsets[i] = m_stepped[i];
+		}
+
+		// Ends extra offset for the first and last tile
+		if (m_stepped[0]) {
+			offsets[0] += m_stepped[1];
+		}
+		if (m_stepped[3]) {
+			offsets[3] += m_stepped[2];
+		}
+
+		// Middle extras
+		if (m_stepped[1]) {
+			if (m_stepped[2] && m_stepped[3]) {
+				offsets[2] += 1;
+				offsets[3] += 1;
+			}
+		}
+
+		if (m_stepped[2]) {
+			if (m_stepped[0] && m_stepped[1]) {
+				offsets[0] += 1;
+				offsets[1] += 1;
+			}
+		}
+
 		const auto pos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();
-		Renderer::GetInstance().RenderTexture(*m_texture, &srcRect, pos.x, pos.y, w, h);
-    }
+		for (int i = 0; i < 4; ++i) {
+			SDL_Rect srcRect{};
+			srcRect.x = static_cast<int>(i * partWidth);
+			srcRect.y = 0;
+			srcRect.w = static_cast<int>(partWidth);
+			srcRect.h = texSize.y;
+
+			float drawX = pos.x + i * partWidth;
+			float drawY = pos.y + static_cast<float>(offsets[i]);
+
+			Renderer::GetInstance().RenderTexture(*m_texture, &srcRect, drawX, drawY, w, h);
+		}
+	}
 
 	void BurgerPiece::SetType(BurgerPieceType type) 
 	{ 
@@ -95,4 +136,60 @@ namespace dae
 	{
         m_localTransform.SetPosition(x, y, 0);
 	}
+
+	void BurgerPiece::SetStepped(int part)
+	{
+		if (part >= 0 && part < 4) {
+			m_stepped[part] = true;
+		}
+	}
+
+	bool BurgerPiece::IsStepped(int part) const
+	{
+		if (part >= 0 && part < 4) {
+			return m_stepped[part];
+		}
+		return false;
+	}
+
+	void BurgerPiece::ResetStepped()
+	{
+		for (int i{0}; i < 4; ++i) {
+			m_stepped[i] = false;
+		}
+	}
+
+	void dae::BurgerPiece::CheckAndSetStepped(const glm::vec2& playerPos, const glm::vec2& playerSize)
+	{
+		glm::vec3 burgerPos = m_localTransform.GetPosition();
+		glm::ivec2 burgerSize = m_texture ? m_texture->GetSize() : glm::ivec2(32, 8); // fallback size
+
+		float partWidth = static_cast<float>(burgerSize.x) / 4.0f;
+		float partHeight = static_cast<float>(burgerSize.y);
+
+		for (int i = 0; i < 4; ++i)
+		{
+			if (IsStepped(i))
+				continue;
+
+			// Each part is laid out horizontally
+			float partX = burgerPos.x + i * partWidth;
+			glm::vec2 partPos(partX, burgerPos.y);
+			glm::vec2 partSize(partWidth, partHeight);
+
+			// AABB collision
+			bool overlap =
+				playerPos.x < partPos.x + partSize.x &&
+				playerPos.x + playerSize.x > partPos.x &&
+				playerPos.y < partPos.y + partSize.y &&
+				playerPos.y + playerSize.y > partPos.y;
+
+			if (overlap)
+			{
+				SetStepped(i);
+				// TODO: Drop logic
+			}
+		}
+	}
+
 }

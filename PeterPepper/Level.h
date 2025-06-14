@@ -31,9 +31,38 @@ namespace dae
         void AddLadder(std::unique_ptr<Ladder> ladder);
         void AddBurgerPiece(std::unique_ptr<BurgerPiece> piece);
 
-        const std::vector<std::unique_ptr<Platform>>& GetPlatforms() const        { return m_platforms; }
-        const std::vector<std::unique_ptr<Ladder>>& GetLadders() const          { return m_ladders; }
-		const std::vector<std::unique_ptr<BurgerPiece>>& GetBurgerPieces() const    { return m_burgerPieces; }
+        std::vector<Platform*> GetPlatforms()
+        {
+            std::vector<Platform*> platforms;
+            platforms.reserve(m_platforms.size());
+            for (auto& platform : m_platforms)
+            {
+                platforms.push_back(platform.get());
+            }
+            return platforms;
+        }
+
+        std::vector<Ladder*> GetLadders()
+        {
+            std::vector<Ladder*> ladders;
+            ladders.reserve(m_ladders.size());
+            for (auto& ladder : m_ladders)
+            {
+                ladders.push_back(ladder.get());
+            }
+            return ladders;
+        }
+
+        std::vector<BurgerPiece*> GetBurgerPieces()
+        {
+            std::vector<BurgerPiece*> pieces;
+            pieces.reserve(m_burgerPieces.size());
+            for (auto& piece : m_burgerPieces)
+            {
+                pieces.push_back(piece.get());
+            }
+            return pieces;
+        }
 
     private:
         std::vector<std::unique_ptr<Platform>> m_platforms;

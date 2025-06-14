@@ -19,8 +19,11 @@ namespace dae
 
 		void SetSpriteSheet(const std::string& filename);
         void SetSpriteWidth(int spriteWidth);
+        int GetSpriteWidth() const { return m_spriteWidth ? m_spriteWidth : 16; }
+		int GetSpriteHeight() const { return m_texture ? m_texture->GetSize().y : 16; }
         void SetFrameTime(float frameTime);
         void SetCurrentFrame(int frame);
+        
 
         void SetMirror(bool toRight = false)
         {

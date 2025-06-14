@@ -62,21 +62,21 @@
     }
   ],
   "burgerPieces": [
-    { "type": "TopBun", "position": { "x": 31, "y": 20 } },
-    { "type": "Lettuce", "position": { "x": 31, "y": 60 } },
-    { "type": "Patty", "position": { "x": 31, "y": 100 } },
-    { "type": "BottomBun", "position": { "x": 31, "y": 140 } },
-    { "type": "TopBun", "position": { "x": 91, "y": 20 } },
-    { "type": "Lettuce", "position": { "x": 91, "y": 60 } },
-    { "type": "Patty", "position": { "x": 91, "y": 100 } },
-    { "type": "BottomBun", "position": { "x": 91, "y": 140 } },
-    { "type": "TopBun", "position": { "x": 151, "y": 20 } },
-    { "type": "Lettuce", "position": { "x": 151, "y": 60 } },
-    { "type": "Patty", "position": { "x": 151, "y": 100 } },
-    { "type": "BottomBun", "position": { "x": 151, "y": 140 } },
-    { "type": "TopBun", "position": { "x": 211, "y": 20 } },
-    { "type": "Lettuce", "position": { "x": 211, "y": 60 } },
-    { "type": "Patty", "position": { "x": 211, "y": 100 } },
-    { "type": "BottomBun", "position": { "x": 211, "y": 140 } }
+    { "type": "TopBun",     "position": { "x": 31, "y": 14 } },
+    { "type": "Lettuce",    "position": { "x": 31, "y": 64 } },
+    { "type": "Patty",      "position": { "x": 31, "y": 114 } },
+    { "type": "BottomBun",  "position": { "x": 31, "y": 164 } },
+    { "type": "TopBun",     "position": { "x": 91, "y": 14 } },
+    { "type": "Lettuce",    "position": { "x": 91, "y": 64 } },
+    { "type": "Patty",      "position": { "x": 91, "y": 114 } },
+    { "type": "BottomBun",  "position": { "x": 91, "y": 164 } },
+    { "type": "TopBun",     "position": { "x": 151, "y": 14 } },
+    { "type": "Lettuce",    "position": { "x": 151, "y": 64 } },
+    { "type": "Patty",      "position": { "x": 151, "y": 114 } },
+    { "type": "BottomBun",  "position": { "x": 151, "y": 164 } },
+    { "type": "TopBun",     "position": { "x": 211, "y": 14 } },
+    { "type": "Lettuce",    "position": { "x": 211, "y": 64 } },
+    { "type": "Patty",      "position": { "x": 211, "y": 114 } },
+    { "type": "BottomBun",  "position": { "x": 211, "y": 164 } }
   ]
 }
