@@ -14,7 +14,7 @@ namespace dae
 			auto scoreComp = dynamic_cast<ScoreComponent*>(subject);
 			if (scoreComp)
 			{
-				m_textComponent->SetText("Score: " + std::to_string(scoreComp->GetScore()));
+				m_textComponent->SetText(std::to_string(scoreComp->GetScore()));
 			}
 		}
 	}

@@ -5,10 +5,11 @@
 PlayerComponent::PlayerComponent(dae::GameObject* ownerPtr)
     : Component(ownerPtr),
 	m_Owner(ownerPtr),
-	m_pSpriteSheet(std::make_unique<dae::SpriteSheetComponent>(ownerPtr, "PPIdle.png", 16, 0.1f)),
+	m_pSpriteSheet(std::make_unique<dae::SpriteSheetComponent>(ownerPtr, "PPIdle.png", 16, 0.25f)),
     m_PlayerState(m_pSpriteSheet.get()),
 	m_direction(0.0f, 0.0f),
-	m_pLevel(nullptr)
+	m_pLevel(nullptr),
+	m_canMove(true)
 {
 	m_pSpriteSheet->SetSpriteWidth(16);
 }
@@ -30,12 +31,17 @@ void PlayerComponent::Update(float deltaTime)
 							m_pSpriteSheet->GetSpriteHeight() }
 			);
 		}
+
+		if (m_pLevel->AreAllBurgersMade())
+		{
+			m_PlayerState.ChangeState(std::make_unique<WinningState>());
+		}
 	}
 }
 
 void PlayerComponent::Move(float x, float y)
 {
-    if (!m_pLevel || (!x && !y)) return;
+    if (!m_pLevel || (!x && !y) || !m_canMove) return;
 
     glm::vec3 currentPos = m_Owner->GetWorldTransform().GetPosition();
     glm::vec3 newPosition = currentPos;

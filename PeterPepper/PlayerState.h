@@ -14,6 +14,7 @@ public:
 	void ChangeState(std::unique_ptr<State<PlayerState>> newState);
 
 	dae::SpriteSheetComponent* GetSpriteSheet() const { return m_pTexture; };
+	
 
 private:
 	std::unique_ptr<StateMachine<PlayerState>> m_StateMachine;

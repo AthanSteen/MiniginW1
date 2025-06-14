@@ -6,6 +6,7 @@
 #include "Font.h"
 #include "Texture2D.h"
 #include "Transform.h"
+#include "SDL.h"
 
 namespace dae
 {
@@ -23,7 +24,8 @@ namespace dae
         void Render() const override;
         void SetLocalPosition(float x, float y) override;
 
-        void SetText(const std::string& text);
+        void SetText(const std::string& text); 
+        void SetColor(const SDL_Color& color = {255, 255, 255, 255});
 
     private:
         bool m_needsUpdate{ true };
@@ -31,5 +33,6 @@ namespace dae
         std::string m_text;
         std::shared_ptr<Font> m_font;
         std::shared_ptr<Texture2D> m_textTexture;
+        SDL_Color m_color;
     };
 }

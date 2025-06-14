@@ -1,6 +1,8 @@
 #include "PlayerState.h"
 #include "PlayerComponent.h"
 #include "GameObject.h"
+#include <ServiceLocator.h>
+#include <SoundService.h>
 
 PlayerState::PlayerState(dae::SpriteSheetComponent* spriteSheet) 
 	: m_StateMachine(std::make_unique<StateMachine<PlayerState>>()),
@@ -144,10 +146,18 @@ void HitState::HandleInput(PlayerState*) {
 #pragma region Dead
 void DeadState::Enter(PlayerState* playerState) {
 	playerState->GetSpriteSheet()->SetSpriteSheet("PPDead.png");
+
+	if (PlayerComponent* playerComp = playerState->GetSpriteSheet()->GetOwner()->GetComponent<PlayerComponent>())
+	{
+		playerComp->CanMove(false);
+	}
 }
 
-void DeadState::Exit(PlayerState*) {
-	// Cleanup hit state
+void DeadState::Exit(PlayerState* playerState) {
+	if (PlayerComponent* playerComp = playerState->GetSpriteSheet()->GetOwner()->GetComponent<PlayerComponent>())
+	{
+		playerComp->CanMove();
+	}
 }
 
 void DeadState::Update(PlayerState*, float) {
@@ -180,9 +190,19 @@ void RespawnState::HandleInput(PlayerState*) {
 #pragma region Winning
 void WinningState::Enter(PlayerState* playerState) {
 	playerState->GetSpriteSheet()->SetSpriteSheet("PPWin.png");
+	dae::ServiceLocator::GetSoundService()->StopAllSounds();
+	dae::ServiceLocator::GetSoundService()->PlaySound("Sound/RoundClear.wav", false);
+	
+	if (PlayerComponent* playerComp = playerState->GetSpriteSheet()->GetOwner()->GetComponent<PlayerComponent>())
+	{
+		playerComp->CanMove(false);
+	}
 }
-void WinningState::Exit(PlayerState*) {
-	// Cleanup winning state
+void WinningState::Exit(PlayerState* playerState) {
+	if (PlayerComponent* playerComp = playerState->GetSpriteSheet()->GetOwner()->GetComponent<PlayerComponent>())
+	{
+		playerComp->CanMove();
+	}
 }
 void WinningState::Update(PlayerState*, float) {
 	// Update winning state

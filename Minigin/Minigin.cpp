@@ -58,7 +58,7 @@ dae::Minigin::Minigin()
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		664,
-		664,
+		684,
 		SDL_WINDOW_OPENGL
 	);
 	if (g_window == nullptr) 

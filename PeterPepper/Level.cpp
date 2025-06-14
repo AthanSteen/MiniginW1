@@ -87,4 +87,16 @@ namespace dae
 		}
 		return false;
 	}
+
+	bool Level::AreAllBurgersMade() const
+	{
+		for (const auto& piece : m_burgerPieces)
+		{
+			if (!piece->IsOnPlate())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 }

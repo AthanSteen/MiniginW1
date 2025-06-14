@@ -35,6 +35,8 @@ namespace dae
         bool isOverlappingPlatform(const glm::vec2& playerPos, const glm::vec2& playerSize) const;
         bool isOverlappingLadders(const glm::vec2& playerPos, const glm::vec2& playerSize) const;
 
+        bool AreAllBurgersMade() const;
+
         std::vector<Platform*> GetPlatforms()
         {
             std::vector<Platform*> platforms;

@@ -18,6 +18,7 @@ public:
 
 	void SetLevel(dae::Level * level) { m_pLevel = level; }
     void Move(float x, float y);
+    void CanMove(bool canMove = true) { m_canMove = canMove; }
 
 private:
     dae::GameObject* m_Owner;
@@ -25,4 +26,6 @@ private:
     PlayerState m_PlayerState;
     dae::Level* m_pLevel;
     glm::vec2 m_direction;
+
+    bool m_canMove{true};
 };

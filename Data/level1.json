@@ -1,149 +1,149 @@
 {
   "playerSpawn": {
     "x": 220,
-    "y": 204
+    "y": 214
   },
   "enemySpawns": [
     {
       "x": 56,
-      "y": 220
+      "y": 230
     },
     {
       "x": 136,
-      "y": 220
+      "y": 230
     },
     {
       "x": 216,
-      "y": 220
+      "y": 230
     }
   ],
   "platforms": [
     {
       "startX": 0,
       "endX": 266,
-      "y": 220
+      "y": 230
     },
     {
       "startX": 0,
       "endX": 266,
-      "y": 170
+      "y": 180
     },
     {
       "startX": 0,
       "endX": 266,
-      "y": 120
+      "y": 130
     },
     {
       "startX": 0,
       "endX": 266,
-      "y": 70
+      "y": 80
     },
     {
       "startX": 0,
       "endX": 266,
-      "y": 20
+      "y": 30
     }
   ],
   "ladders": [
     {
       "x": 71,
-      "topY": 170,
-      "bottomY": 222
+      "topY": 180,
+      "bottomY": 232
     },
     {
       "x": 71,
-      "topY": 120,
-      "bottomY": 172
+      "topY": 130,
+      "bottomY": 182
     },
     {
       "x": 71,
-      "topY": 70,
-      "bottomY": 122
+      "topY": 80,
+      "bottomY": 132
     },
     {
       "x": 71,
-      "topY": 20,
-      "bottomY": 72
+      "topY": 30,
+      "bottomY": 82
     },
     {
       "x": 131,
-      "topY": 170,
-      "bottomY": 222
+      "topY": 180,
+      "bottomY": 232
     },
     {
       "x": 131,
-      "topY": 120,
-      "bottomY": 172
+      "topY": 130,
+      "bottomY": 182
     },
     {
       "x": 131,
-      "topY": 70,
-      "bottomY": 122
+      "topY": 80,
+      "bottomY": 132
     },
     {
       "x": 131,
-      "topY": 20,
-      "bottomY": 72
+      "topY": 30,
+      "bottomY": 82
     },
     {
       "x": 191,
-      "topY": 170,
-      "bottomY": 222
+      "topY": 180,
+      "bottomY": 232
     },
     {
       "x": 191,
-      "topY": 120,
-      "bottomY": 172
+      "topY": 130,
+      "bottomY": 182
     },
     {
       "x": 191,
-      "topY": 70,
-      "bottomY": 122
+      "topY": 80,
+      "bottomY": 132
     },
     {
       "x": 191,
-      "topY": 20,
-      "bottomY": 72
+      "topY": 30,
+      "bottomY": 82
     }
   ],
   "plates": [
     {
       "startX": 31,
       "endX": 63,
-      "y": 255
+      "y": 265
     },
     {
       "startX": 91,
       "endX": 123,
-      "y": 255
+      "y": 265
     },
     {
       "startX": 151,
       "endX": 183,
-      "y": 255
+      "y": 265
     },
     {
       "startX": 211,
       "endX": 243,
-      "y": 255
+      "y": 265
     }
   ],
   "burgerPieces": [
-    { "type": "TopBun",     "position": { "x": 31, "y": 14 } },
-    { "type": "Lettuce",    "position": { "x": 31, "y": 64 } },
-    { "type": "Patty",      "position": { "x": 31, "y": 114 } },
-    { "type": "BottomBun",  "position": { "x": 31, "y": 164 } },
-    { "type": "TopBun",     "position": { "x": 91, "y": 14 } },
-    { "type": "Lettuce",    "position": { "x": 91, "y": 64 } },
-    { "type": "Patty",      "position": { "x": 91, "y": 114 } },
-    { "type": "BottomBun",  "position": { "x": 91, "y": 164 } },
-    { "type": "TopBun",     "position": { "x": 151, "y": 14 } },
-    { "type": "Lettuce",    "position": { "x": 151, "y": 64 } },
-    { "type": "Patty",      "position": { "x": 151, "y": 114 } },
-    { "type": "BottomBun",  "position": { "x": 151, "y": 164 } },
-    { "type": "TopBun",     "position": { "x": 211, "y": 14 } },
-    { "type": "Lettuce",    "position": { "x": 211, "y": 64 } },
-    { "type": "Patty",      "position": { "x": 211, "y": 114 } },
-    { "type": "BottomBun",  "position": { "x": 211, "y": 164 } }
+    { "type": "TopBun",     "position": { "x": 31, "y": 24 } },
+    { "type": "Lettuce",    "position": { "x": 31, "y": 74 } },
+    { "type": "Patty",      "position": { "x": 31, "y": 124 } },
+    { "type": "BottomBun",  "position": { "x": 31, "y": 174 } },
+    { "type": "TopBun",     "position": { "x": 91, "y": 24 } },
+    { "type": "Lettuce",    "position": { "x": 91, "y": 74 } },
+    { "type": "Patty",      "position": { "x": 91, "y": 124 } },
+    { "type": "BottomBun",  "position": { "x": 91, "y": 174 } },
+    { "type": "TopBun",     "position": { "x": 151, "y": 24 } },
+    { "type": "Lettuce",    "position": { "x": 151, "y": 74 } },
+    { "type": "Patty",      "position": { "x": 151, "y": 124 } },
+    { "type": "BottomBun",  "position": { "x": 151, "y": 174 } },
+    { "type": "TopBun",     "position": { "x": 211, "y": 24 } },
+    { "type": "Lettuce",    "position": { "x": 211, "y": 74 } },
+    { "type": "Patty",      "position": { "x": 211, "y": 124 } },
+    { "type": "BottomBun",  "position": { "x": 211, "y": 174 } }
   ]
 }

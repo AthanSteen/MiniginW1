@@ -4,20 +4,22 @@
 #include <SDL_ttf.h>
 #include "GameObject.h"
 
+
 namespace dae
 {
     TextComponent::TextComponent(GameObject* ownerPtr, const std::string& text, std::shared_ptr<Font> font)
-        : Component(ownerPtr), m_text(text), m_font(std::move(font))
+        : Component(ownerPtr), 
+        m_text(text), 
+        m_font(std::move(font)),
+        m_color{ SDL_Color{255,255,255,255} }
     {
     }
 
-    void TextComponent::Update(float deltaTime)
+    void TextComponent::Update(float)
     {
-		(void)deltaTime;
         if (m_needsUpdate)
         {
-            const SDL_Color color = { 255, 255, 255, 255 };
-            SDL_Surface* surf = TTF_RenderText_Blended(m_font->GetFont(), m_text.c_str(), color);
+            SDL_Surface* surf = TTF_RenderText_Blended(m_font->GetFont(), m_text.c_str(), m_color);
             if (!surf)
             {
                 throw std::runtime_error("Render text failed: " + std::string(SDL_GetError()));
@@ -58,4 +60,10 @@ namespace dae
             m_needsUpdate = true;
         }
     }
+
+	void TextComponent::SetColor(const SDL_Color& color)
+	{
+        m_color = color; 
+        m_needsUpdate = true;
+	}
 }
