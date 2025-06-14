@@ -30,6 +30,9 @@ namespace dae
         void AddPlatform(std::unique_ptr<Platform> platform);
         void AddLadder(std::unique_ptr<Ladder> ladder);
         void AddBurgerPiece(std::unique_ptr<BurgerPiece> piece);
+        
+        bool isOverlappingPlatform(const glm::vec2& playerPos, const glm::vec2& playerSize) const;
+        bool isOverlappingLadders(const glm::vec2& playerPos, const glm::vec2& playerSize) const;
 
         std::vector<Platform*> GetPlatforms()
         {

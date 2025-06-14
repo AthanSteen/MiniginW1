@@ -47,18 +47,63 @@
   "ladders": [
     {
       "x": 71,
+      "topY": 170,
+      "bottomY": 222
+    },
+    {
+      "x": 71,
+      "topY": 120,
+      "bottomY": 172
+    },
+    {
+      "x": 71,
+      "topY": 70,
+      "bottomY": 122
+    },
+    {
+      "x": 71,
       "topY": 20,
-      "bottomY": 220
+      "bottomY": 72
+    },
+    {
+      "x": 131,
+      "topY": 170,
+      "bottomY": 222
+    },
+    {
+      "x": 131,
+      "topY": 120,
+      "bottomY": 172
+    },
+    {
+      "x": 131,
+      "topY": 70,
+      "bottomY": 122
     },
     {
       "x": 131,
       "topY": 20,
-      "bottomY": 220
+      "bottomY": 72
+    },
+    {
+      "x": 191,
+      "topY": 170,
+      "bottomY": 222
+    },
+    {
+      "x": 191,
+      "topY": 120,
+      "bottomY": 172
+    },
+    {
+      "x": 191,
+      "topY": 70,
+      "bottomY": 122
     },
     {
       "x": 191,
       "topY": 20,
-      "bottomY": 220
+      "bottomY": 72
     }
   ],
   "burgerPieces": [

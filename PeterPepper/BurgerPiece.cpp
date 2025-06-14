@@ -1,6 +1,7 @@
 #include "BurgerPiece.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "collisionUtils.h"
 
 namespace dae
 {
@@ -177,12 +178,7 @@ namespace dae
 			glm::vec2 partPos(partX, burgerPos.y);
 			glm::vec2 partSize(partWidth, partHeight);
 
-			// AABB collision
-			bool overlap =
-				playerPos.x < partPos.x + partSize.x &&
-				playerPos.x + playerSize.x > partPos.x &&
-				playerPos.y < partPos.y + partSize.y &&
-				playerPos.y + playerSize.y > partPos.y;
+			bool overlap = IsAABBOverlap(playerPos, playerSize, partPos, partSize);
 
 			if (overlap)
 			{

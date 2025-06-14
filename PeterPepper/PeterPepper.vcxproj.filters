@@ -108,6 +108,9 @@
     <ClCompile Include="BurgerPiece.cpp">
       <Filter>Source Files\Level\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="collisionUtils.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddScoreCommand.h">

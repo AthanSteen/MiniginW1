@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="AddScoreCommand.cpp" />
     <ClCompile Include="BurgerPiece.cpp" />
+    <ClCompile Include="collisionUtils.h" />
     <ClCompile Include="FPSComponent.cpp" />
     <ClCompile Include="GameActorCommand.cpp" />
     <ClCompile Include="KillCommand.cpp" />

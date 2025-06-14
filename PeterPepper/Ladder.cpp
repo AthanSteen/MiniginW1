@@ -1,6 +1,7 @@
 #include "Ladder.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "collisionUtils.h"
 
 namespace dae
 {
@@ -47,6 +48,18 @@ namespace dae
         // Draw bottom connection
         Renderer::GetInstance().RenderTexture(*m_textureConnection, nullptr, x - 2, y + m_height - connTexSize.y, m_width + 4, static_cast<float>(connTexSize.y));
     }
+
+	bool Ladder::IsOverlapping(const glm::vec2& playerPos, const glm::vec2& playerSize)
+	{
+        glm::vec2 ladderPos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();
+        glm::vec2 ladderSize{ m_width, m_height };
+
+        // Use the bottom of the player for overlap
+        glm::vec2 playerBottomPos = { playerPos.x, playerPos.y + playerSize.y - 1.0f };
+        glm::vec2 playerBottomSize = { playerSize.x, 1.0f };
+
+        return IsAABBOverlap(playerBottomPos, playerBottomSize, ladderPos, ladderSize);
+	}
 
     void Ladder::SetLocalPosition(float x, float y)
     {

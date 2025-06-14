@@ -1,6 +1,7 @@
 #include "Platform.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "collisionUtils.h"
 
 namespace dae
 {
@@ -39,5 +40,17 @@ namespace dae
     void Platform::SetLocalPosition(float x, float y)
     {
         m_localTransform.SetPosition(x, y, 0);
+    }
+
+    bool Platform::IsOverlapping(const glm::vec2& playerPos, const glm::vec2& playerSize) const
+    {
+        glm::vec2 platformPos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();
+        glm::vec2 platformSize{ m_width, static_cast<float>(m_texture->GetSize().y) };
+
+        // Use the bottom of the player for overlap
+        glm::vec2 playerBottomPos = { playerPos.x, playerPos.y + playerSize.y - 1.f};
+        glm::vec2 playerBottomSize = { playerSize.x, 2.0f };
+
+        return IsAABBOverlap(playerBottomPos, playerBottomSize, platformPos, platformSize);
     }
 }

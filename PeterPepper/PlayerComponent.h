@@ -3,6 +3,7 @@
 #include "PlayerState.h"
 #include "Level.h"
 
+class dae::GameObject;
 class PlayerComponent : public dae::Component
 {
 public:
@@ -16,9 +17,11 @@ public:
 	const glm::vec2& GetDirection() const { return m_direction; }
 
 	void SetLevel(dae::Level * level) { m_pLevel = level; }
+    void Move(float x, float y);
 
 private:
-	std::unique_ptr<dae::SpriteSheetComponent> m_pSpriteSheet;
+    dae::GameObject* m_Owner;
+    std::unique_ptr<dae::SpriteSheetComponent> m_pSpriteSheet;
     PlayerState m_PlayerState;
     dae::Level* m_pLevel;
     glm::vec2 m_direction;

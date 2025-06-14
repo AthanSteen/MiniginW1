@@ -51,4 +51,28 @@ namespace dae
 			m_burgerPieces.push_back(std::move(piece));
 		}
     }
+
+	bool Level::isOverlappingPlatform(const glm::vec2& playerPos, const glm::vec2& playerSize) const
+	{
+		for (const auto& platform : m_platforms)
+		{
+			if (platform->IsOverlapping(playerPos, playerSize))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool Level::isOverlappingLadders(const glm::vec2& playerPos, const glm::vec2& playerSize) const
+	{
+		for (const auto& ladder : m_ladders)
+		{
+			if (ladder->IsOverlapping(playerPos, playerSize))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

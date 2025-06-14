@@ -22,6 +22,8 @@ namespace dae
 
         void SetLocalPosition(float x, float y) override;
 		void SetWidth(float width) { m_width = width; }
+
+        bool IsOverlapping(const glm::vec2& playerPos, const glm::vec2& playerSize) const;
     private:
         Transform m_localTransform;
         std::shared_ptr<Texture2D> m_texture;

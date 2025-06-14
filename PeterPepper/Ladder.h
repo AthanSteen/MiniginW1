@@ -4,6 +4,7 @@
 #include "TextureComponent.h"
 #include <memory>
 #include <string>
+#include <glm.hpp>
 
 namespace dae
 {
@@ -25,6 +26,7 @@ namespace dae
         void SetHeight(float height) { m_height = height; }
         void SetWidth(float width) { m_width = width; }
 
+        bool IsOverlapping(const glm::vec2& playerPos, const glm::vec2& playerSize);
     private:
         Transform m_localTransform;
         std::shared_ptr<Texture2D> m_texture;

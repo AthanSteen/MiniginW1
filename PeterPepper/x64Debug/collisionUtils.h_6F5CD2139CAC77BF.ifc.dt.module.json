@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64Debug\\collisionUtils.obj",
+            "outputs": [
+                "x64Debug\\collisionUtils.h_6F5CD2139CAC77BF.ifc.dt.module.json",
+                "x64Debug\\collisionUtils.h_6F5CD2139CAC77BF.ifc.dt.d.json",
+                "x64Debug\\collisionUtils.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\DAE\\24-25\\SEM4\\PROG4\\minigin-main\\PeterPepper\\collisionUtils.h",
+                    "source-path": "c:\\dae\\24-25\\sem4\\prog4\\minigin-main\\peterpepper\\collisionutils.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

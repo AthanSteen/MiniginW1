@@ -16,13 +16,14 @@ namespace dae
         {
             glm::vec3 pos{ m_pObject->GetWorldTransform().GetPosition() };
             glm::vec3 offset(m_direction, 0.f);
-            m_pObject->SetLocalPosition( pos + offset * m_speed);
 
             auto* playerComp = m_pObject->GetComponent<PlayerComponent>();
             if (playerComp)
             {
                 auto currentDirection = playerComp->GetDirection();
 
+				playerComp->Move(offset.x * m_speed, offset.y * m_speed); 
+                
                 if (m_direction.x != 0.f)
                 {
                     if (currentDirection.x == m_direction.x * -1)
@@ -40,6 +41,8 @@ namespace dae
                 //trying to fix correct image but now working
                 playerComp->SetDirection(currentDirection);
             }
+            else
+                m_pObject->SetLocalPosition(pos + offset * m_speed);
         }
     }
 }
