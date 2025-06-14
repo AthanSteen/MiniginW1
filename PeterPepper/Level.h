@@ -7,6 +7,7 @@
 #include "Platform.h"
 #include "Ladder.h"
 #include <glm.hpp>
+#include "ScoreComponent.h"
 
 namespace dae
 {
@@ -67,11 +68,15 @@ namespace dae
             return pieces;
         }
 
+        void SetScoreComponent(ScoreComponent* pScore) { m_pScoreComponent = pScore; }
+        ScoreComponent* GetScoreComponent() const { return m_pScoreComponent; }
     private:
         std::vector<std::unique_ptr<Platform>> m_platforms;
         std::vector<std::unique_ptr<Ladder>> m_ladders;
         std::vector<std::unique_ptr<BurgerPiece>> m_burgerPieces;
 
         glm::vec2 m_playerSpawn;
+
+        ScoreComponent* m_pScoreComponent{ nullptr };
     };
 }

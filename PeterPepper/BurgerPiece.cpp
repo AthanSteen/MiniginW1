@@ -7,6 +7,7 @@
 #include "ServiceLocator.h"
 #include "SoundService.h"
 #include "Plate.h"
+#include "AddScoreCommand.h"
 
 namespace dae
 {
@@ -81,8 +82,7 @@ namespace dae
 				if (below->IsOnPlate())
 				{
 					m_isOnPlate = true;
-					m_isFalling = false;
-					ResetStepped();
+					OnLand();
 				}
 				else {
 					below->Fall();
@@ -101,7 +101,8 @@ namespace dae
 	void BurgerPiece::OnLand() {
 		m_isFalling = false;
 		ResetStepped();
-		// TODO: Award score here (see next step)
+
+		m_pLevel->GetScoreComponent()->AddScore(m_scoreValue);
 	}
 
 	BurgerPiece* BurgerPiece::FindIngredientBelow()

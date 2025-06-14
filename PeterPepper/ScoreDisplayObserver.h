@@ -14,8 +14,8 @@ namespace dae
 
 		void Notify(Event event, Subject* subject) override;
 
-		void Register(ScoreComponent* livesComp);
-		void Unregister(ScoreComponent* livesComp);
+		void Register(ScoreComponent* scoresComp);
+		void Unregister(ScoreComponent* scoresComp);
 
 		void Update(float deltaTime) override { (void)deltaTime; }
 		void Render() const override {}

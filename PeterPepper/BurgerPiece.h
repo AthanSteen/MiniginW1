@@ -55,7 +55,7 @@ namespace dae
 		std::shared_ptr<Texture2D> m_texture;
 		Level* m_pLevel;
         Platform* m_lastPlatform;
-		int m_scoreValue{ 100 };
+		int m_scoreValue{ 50 };
 		bool m_stepped[4]{ false, false, false, false };
         bool m_isFalling;
         bool m_isOnPlate;
