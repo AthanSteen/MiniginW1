@@ -74,20 +74,26 @@ void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const
 
 void dae::Renderer::RenderTexture(const Texture2D& texture, const SDL_Rect* srcRect, const float x, const float y) const
 {
-	SDL_Rect dst{};
-	dst.x = static_cast<int>(x);
-	dst.y = static_cast<int>(y);
-	SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
-	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), srcRect, &dst);
+	glm::ivec2 size;
+	if (srcRect)
+		size = { srcRect->w, srcRect->h };
+	else
+		size = texture.GetSize();
+
+	RenderTexture(texture, srcRect, x, y, static_cast<float>(size.x), static_cast<float>(size.y));
+
 }
 
 void dae::Renderer::RenderTexture(const Texture2D& texture, const SDL_Rect* srcRect, const float x, const float y, const float width, const float height, bool flipToRight) const
 {
+	float zoom = GetZoom();
+
 	SDL_Rect dst{};
-	dst.x = static_cast<int>(x);
-	dst.y = static_cast<int>(y);
-	dst.w = static_cast<int>(width);
-	dst.h = static_cast<int>(height);
+	dst.x = static_cast<int>(x * zoom);
+	dst.y = static_cast<int>(y * zoom);
+	dst.w = static_cast<int>(width * zoom);
+	dst.h = static_cast<int>(height * zoom);
+
 	if (flipToRight)
 	{
 		SDL_Point* center = NULL;

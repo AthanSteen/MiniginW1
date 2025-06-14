@@ -54,11 +54,11 @@ dae::Minigin::Minigin()
 	}
 
 	g_window = SDL_CreateWindow(
-		"Programming 4 assignment",
+		"Programming 4 BurgerTime - Van den Steen Athan 2GD10E",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		640,
-		480,
+		664,
+		600,
 		SDL_WINDOW_OPENGL
 	);
 	if (g_window == nullptr) 
@@ -114,7 +114,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 		const auto sleepTime = currentTime + std::chrono::milliseconds(msPerFrame) - std::chrono::steady_clock().now();
 		
-		std::cout << sleepTime << std::endl; 
+		//std::cout << sleepTime << std::endl; 
 
 		if (sleepTime > std::chrono::milliseconds(0)) // Ensure we don't sleep for negative time
 		{

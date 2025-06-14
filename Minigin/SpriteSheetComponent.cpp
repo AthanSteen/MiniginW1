@@ -28,8 +28,6 @@ namespace dae
         {
             m_elapsedTime -= m_frameTime;
             m_currentFrame = (m_currentFrame + 1) % m_totalFrames;
-
-            std::cout << std::endl << std::endl << m_currentFrame << std::endl << std::endl;
         }
     }
 

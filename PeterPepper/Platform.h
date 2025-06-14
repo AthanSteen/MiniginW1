@@ -1,6 +1,9 @@
 #pragma once
 #include "Component.h"
 #include "Transform.h"
+#include "TextureComponent.h"
+#include <memory>
+#include <string>
 
 namespace dae
 {
@@ -21,6 +24,7 @@ namespace dae
 		void SetWidth(float width) { m_width = width; }
     private:
         Transform m_localTransform;
+        std::shared_ptr<Texture2D> m_texture;
 		float m_width;
     };
 }

@@ -1,190 +1,82 @@
 {
   "playerSpawn": {
-    "x": 120,
-    "y": 440
+    "x": 220,
+    "y": 204
   },
-
   "enemySpawns": [
     {
-      "x": 40,
-      "y": 440
+      "x": 56,
+      "y": 220
     },
     {
-      "x": 280,
-      "y": 440
+      "x": 136,
+      "y": 220
     },
     {
-      "x": 180,
-      "y": 440
+      "x": 216,
+      "y": 220
     }
   ],
-
   "platforms": [
     {
-      "startX": 20,
-      "endX": 300,
-      "y": 440
+      "startX": 0,
+      "endX": 266,
+      "y": 220
     },
     {
-      "startX": 40,
-      "endX": 260,
-      "y": 360
+      "startX": 0,
+      "endX": 266,
+      "y": 170
     },
     {
-      "startX": 60,
-      "endX": 240,
-      "y": 280
-    },
-    {
-      "startX": 40,
-      "endX": 260,
-      "y": 200
-    },
-    {
-      "startX": 20,
-      "endX": 300,
+      "startX": 0,
+      "endX": 266,
       "y": 120
+    },
+    {
+      "startX": 0,
+      "endX": 266,
+      "y": 70
+    },
+    {
+      "startX": 0,
+      "endX": 266,
+      "y": 20
     }
   ],
-
   "ladders": [
     {
-      "x": 60,
-      "topY": 120,
-      "bottomY": 440
+      "x": 71,
+      "topY": 20,
+      "bottomY": 220
     },
     {
-      "x": 120,
-      "topY": 120,
-      "bottomY": 440
+      "x": 131,
+      "topY": 20,
+      "bottomY": 220
     },
     {
-      "x": 180,
-      "topY": 120,
-      "bottomY": 440
-    },
-    {
-      "x": 240,
-      "topY": 120,
-      "bottomY": 440
+      "x": 191,
+      "topY": 20,
+      "bottomY": 220
     }
   ],
-
   "burgerPieces": [
-    {
-      "type": "TopBun",
-      "position": {
-        "x": 60,
-        "y": 120
-      }
-    },
-    {
-      "type": "Lettuce",
-      "position": {
-        "x": 60,
-        "y": 200
-      }
-    },
-    {
-      "type": "Patty",
-      "position": {
-        "x": 60,
-        "y": 280
-      }
-    },
-    {
-      "type": "BottomBun",
-      "position": {
-        "x": 60,
-        "y": 360
-      }
-    },
-
-    {
-      "type": "TopBun",
-      "position": {
-        "x": 120,
-        "y": 120
-      }
-    },
-    {
-      "type": "Lettuce",
-      "position": {
-        "x": 120,
-        "y": 200
-      }
-    },
-    {
-      "type": "Patty",
-      "position": {
-        "x": 120,
-        "y": 280
-      }
-    },
-    {
-      "type": "BottomBun",
-      "position": {
-        "x": 120,
-        "y": 360
-      }
-    },
-
-    {
-      "type": "TopBun",
-      "position": {
-        "x": 180,
-        "y": 120
-      }
-    },
-    {
-      "type": "Lettuce",
-      "position": {
-        "x": 180,
-        "y": 200
-      }
-    },
-    {
-      "type": "Patty",
-      "position": {
-        "x": 180,
-        "y": 280
-      }
-    },
-    {
-      "type": "BottomBun",
-      "position": {
-        "x": 180,
-        "y": 360
-      }
-    },
-
-    {
-      "type": "TopBun",
-      "position": {
-        "x": 240,
-        "y": 120
-      }
-    },
-    {
-      "type": "Lettuce",
-      "position": {
-        "x": 240,
-        "y": 200
-      }
-    },
-    {
-      "type": "Patty",
-      "position": {
-        "x": 240,
-        "y": 280
-      }
-    },
-    {
-      "type": "BottomBun",
-      "position": {
-        "x": 240,
-        "y": 360
-      }
-    }
+    { "type": "TopBun", "position": { "x": 31, "y": 20 } },
+    { "type": "Lettuce", "position": { "x": 31, "y": 60 } },
+    { "type": "Patty", "position": { "x": 31, "y": 100 } },
+    { "type": "BottomBun", "position": { "x": 31, "y": 140 } },
+    { "type": "TopBun", "position": { "x": 91, "y": 20 } },
+    { "type": "Lettuce", "position": { "x": 91, "y": 60 } },
+    { "type": "Patty", "position": { "x": 91, "y": 100 } },
+    { "type": "BottomBun", "position": { "x": 91, "y": 140 } },
+    { "type": "TopBun", "position": { "x": 151, "y": 20 } },
+    { "type": "Lettuce", "position": { "x": 151, "y": 60 } },
+    { "type": "Patty", "position": { "x": 151, "y": 100 } },
+    { "type": "BottomBun", "position": { "x": 151, "y": 140 } },
+    { "type": "TopBun", "position": { "x": 211, "y": 20 } },
+    { "type": "Lettuce", "position": { "x": 211, "y": 60 } },
+    { "type": "Patty", "position": { "x": 211, "y": 100 } },
+    { "type": "BottomBun", "position": { "x": 211, "y": 140 } }
   ]
 }

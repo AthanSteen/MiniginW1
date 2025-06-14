@@ -58,7 +58,6 @@ void WalkingState::Exit(PlayerState*) {
 	// Cleanup walking state
 }
 
-#include "iostream"
 void WalkingState::Update(PlayerState* playerState, float) {
 	// Update walking state
 	if (m_playerComp)
@@ -67,7 +66,6 @@ void WalkingState::Update(PlayerState* playerState, float) {
 		const auto& vel = m_playerComp->GetDirection();
 
 		// Assign the correct sprite sheet based on direction
-		std::cout << "X: " << vel.x << "Y: " << vel.y << std::endl;
 		if (vel.x > 0)
 		{
 			playerState->GetSpriteSheet()->SetSpriteSheet("PPLeft.png");

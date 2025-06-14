@@ -25,6 +25,7 @@ namespace dae
         void SetLocalPosition(float, float) override {}
 
 		void SetPlayerSpawn(const glm::vec2& spawn) { m_playerSpawn = spawn; }
+		const glm::vec2& GetPlayerSpawn() const { return m_playerSpawn; }
 
         void AddPlatform(std::unique_ptr<Platform> platform);
         void AddLadder(std::unique_ptr<Ladder> ladder);
