@@ -42,6 +42,11 @@ namespace dae
         m_localTransform.SetPosition(x, y, 0);
     }
 
+	void Platform::GetWorldPosition(glm::vec2& outPos) const
+	{
+		outPos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();
+	}
+
     bool Platform::IsOverlapping(const glm::vec2& playerPos, const glm::vec2& playerSize) const
     {
         glm::vec2 platformPos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();

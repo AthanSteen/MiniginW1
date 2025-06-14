@@ -2,21 +2,112 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "collisionUtils.h"
+#include "Level.h"
+#include "iostream"
 
 namespace dae
 {
-    BurgerPiece::BurgerPiece(GameObject* ownerPtr) : 
+    BurgerPiece::BurgerPiece(GameObject* ownerPtr, Level* levelPtr) : 
         Component(ownerPtr),
+		m_pLevel(levelPtr),
+		m_lastPlatform(nullptr),
         m_localTransform(),
 		m_texture(nullptr)
     {
 
     }
 
-    void BurgerPiece::Update(float /*deltaTime*/)
-    {
+	void BurgerPiece::Update(float deltaTime)
+	{
+		if (!m_isFalling && IsFullyStepped())
+		{
+			Fall();
+		}
+		if (m_isFalling)
+		{
+			auto pos = m_localTransform.GetPosition();
+			float prevY = pos.y;
+			pos.y += 5.0f * deltaTime;
 
-    }
+			glm::vec2 worldPos = GetOwner()->GetWorldTransform().GetPosition() + pos;
+			glm::vec2 mySize{ m_texture->GetSize().x, static_cast<float>(m_texture->GetSize().y) };
+			bool landed = false;
+			
+			for (auto* platform : m_pLevel->GetPlatforms())
+			{
+				if (platform == m_lastPlatform) continue; // Skip the last platform we landed on
+
+				glm::vec2 platPos;
+				platform->GetWorldPosition(platPos);
+
+				float platTop = platPos.y;
+				float prevBottom = GetOwner()->GetWorldTransform().GetPosition().y + prevY + mySize.y;
+				float newBottom = worldPos.y + mySize.y;
+
+				bool wasAbove = prevBottom <= platTop;
+				bool isNowBelowOrAt = newBottom >= platTop;
+				bool xOverlap = worldPos.x < platPos.x + platform->GetWidth() && worldPos.x + mySize.x > platPos.x;
+
+				if (wasAbove && isNowBelowOrAt && xOverlap)
+				{
+					pos.y = platTop - mySize.y;
+					landed = true;
+					m_lastPlatform = platform;
+					break;
+				}
+			}
+
+			SetLocalPosition(pos.x, pos.y);
+
+			if (landed)
+			{
+				auto* below = FindIngredientBelow();
+				if (below)
+				{
+					below->Fall();
+				}
+				OnLand();
+			}
+		}
+	}
+	void BurgerPiece::Fall()
+	{
+		if (m_isFalling) return;
+			m_isFalling = true;
+	}
+
+	void BurgerPiece::OnLand() {
+		m_isFalling = false;
+		ResetStepped();
+		// TODO: Award score here (see next step)
+
+		auto below = FindIngredientBelow();
+		if (below && !below->m_isFalling) {
+			below->Fall();
+		}
+	}
+
+	BurgerPiece* BurgerPiece::FindIngredientBelow()
+	{
+		if (!m_pLevel) return nullptr;
+
+		auto allPieces = m_pLevel->GetBurgerPieces();
+		glm::vec2 myPos = GetOwner()->GetWorldTransform().GetPosition() + m_localTransform.GetPosition();
+		glm::vec2 mySize{ m_texture->GetSize().x / 4.0f, static_cast<float>(m_texture->GetSize().y) };
+
+		for (auto& piece : allPieces)
+		{
+			if (piece == this) continue; // Skip self
+			glm::vec2 otherPos = piece->GetOwner()->GetWorldTransform().GetPosition() + piece->m_localTransform.GetPosition();
+			glm::vec2 otherSize{ piece->m_texture->GetSize().x / 4.0f, static_cast<float>(piece->m_texture->GetSize().y) };
+			if (IsAABBOverlap(myPos, mySize, otherPos, otherSize))
+			{
+				return piece;
+			}
+		}
+		return nullptr;
+	}
+
 
 
 	void dae::BurgerPiece::Render() const
@@ -153,6 +244,16 @@ namespace dae
 		return false;
 	}
 
+	bool BurgerPiece::IsFullyStepped() const
+	{
+		for (int i = 0; i < 4; ++i) {
+			if (!m_stepped[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	void BurgerPiece::ResetStepped()
 	{
 		for (int i{0}; i < 4; ++i) {
@@ -183,7 +284,6 @@ namespace dae
 			if (overlap)
 			{
 				SetStepped(i);
-				// TODO: Drop logic
 			}
 		}
 	}

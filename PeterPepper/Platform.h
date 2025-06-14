@@ -21,7 +21,9 @@ namespace dae
         void Render() const override;
 
         void SetLocalPosition(float x, float y) override;
+        void GetWorldPosition(glm::vec2& outPos) const;
 		void SetWidth(float width) { m_width = width; }
+		float GetWidth() const { return m_width; }
 
         bool IsOverlapping(const glm::vec2& playerPos, const glm::vec2& playerSize) const;
     private:

@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "Platform.h"
 
 namespace dae
 {
@@ -9,9 +10,20 @@ namespace dae
 
     }
 
-    void Level::Update(float /*deltaTime*/)
+    void Level::Update(float deltaTime)
     {
-
+		for (const auto& platform : m_platforms)
+		{
+			platform->Update(deltaTime);
+		}
+		for (const auto& ladder : m_ladders)
+		{
+			ladder->Update(deltaTime);
+		}
+		for (const auto& piece : m_burgerPieces)
+		{
+			piece->Update(deltaTime);
+		}
     }
 
     void Level::Render() const

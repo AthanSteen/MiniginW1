@@ -17,18 +17,20 @@ namespace dae
         BottomBun 
     };
 
+    class Level;
+	class Platform;
 	class BurgerPiece : public Component
     {
     public:
-        explicit BurgerPiece(GameObject* ownerPtr);
+        explicit BurgerPiece(GameObject* ownerPtr, Level* levelPtr);
 
         BurgerPiece(const BurgerPiece& other) = delete;
         BurgerPiece(BurgerPiece&& other) = delete;
         BurgerPiece& operator=(const BurgerPiece& other) = delete;
         BurgerPiece& operator=(BurgerPiece&& other) = delete;
 
-        void Update(float deltaTime);
-        void Render() const;
+        void Update(float deltaTime) override;
+        void Render() const override;
 
         void SetLocalPosition(float x, float y) override;
         void SetType(BurgerPieceType type);
@@ -39,14 +41,23 @@ namespace dae
         
         void SetStepped(int part);
         bool IsStepped(int part) const;
+        bool IsFullyStepped() const;
 		void ResetStepped();
+
+        void Fall();
 
         void CheckAndSetStepped(const glm::vec2& playerPos, const glm::vec2& playerSize);
 	private:
         Transform m_localTransform;
 		BurgerPieceType m_type;
 		std::shared_ptr<Texture2D> m_texture;
+		Level* m_pLevel;
+        Platform* m_lastPlatform;
 		int m_scoreValue{ 100 };
 		bool m_stepped[4]{ false, false, false, false };
+        bool m_isFalling;
+
+        void OnLand();
+        BurgerPiece* FindIngredientBelow();
     };
 }

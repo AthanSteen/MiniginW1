@@ -151,7 +151,7 @@ namespace dae
                         if (pos.contains("x") && pos["x"].is_number() &&
                             pos.contains("y") && pos["y"].is_number())
                         {
-                            auto burger = std::make_unique<BurgerPiece>(m_pOwner);
+                            auto burger = std::make_unique<BurgerPiece>(m_pOwner, outLevel);
                             std::string typeStr = b["type"].get<std::string>();
                             burger->SetType(burger->ConvertStringToBurgerType(typeStr));
                             burger->SetLocalPosition(pos["x"].get<float>(), pos["y"].get<float>());
