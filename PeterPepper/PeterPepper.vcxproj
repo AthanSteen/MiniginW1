@@ -54,6 +54,7 @@
     <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="LivesDisplayObserver.h" />
     <ClInclude Include="MoveCommand.h" />
+    <ClInclude Include="MuteCommands.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="PlayerComponent.h" />
     <ClInclude Include="PlayerState.h" />

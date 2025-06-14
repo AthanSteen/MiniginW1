@@ -13,8 +13,10 @@ namespace dae
         SDLMixerSoundService();
         ~SDLMixerSoundService() override;
 
-        void PlaySound(const std::string& soundFile) override;
+        void PlaySound(const std::string& soundFile, bool loop = false) override;
         void StopAllSounds() override;
+        void MuteAll() override;
+        void UnmuteAll() override;
 
     private:
         class Impl;

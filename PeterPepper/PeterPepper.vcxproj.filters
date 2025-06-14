@@ -173,5 +173,8 @@
     <ClInclude Include="Platform.h">
       <Filter>Header Files\Level\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="MuteCommands.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

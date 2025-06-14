@@ -28,11 +28,11 @@ namespace dae
             Mix_CloseAudio();
         }
 
-        void EnqueueSound(const std::string& soundFile)
+        void EnqueueSound(const std::string& soundFile, bool loop)
         {
             {
                 std::lock_guard lock(m_Mutex);
-                m_SoundQueue.push(soundFile);
+                m_SoundQueue.push({ soundFile, loop });
             }
             m_Condition.notify_one();
         }
@@ -71,18 +71,19 @@ namespace dae
 
                     while (!m_SoundQueue.empty())
                     {
-                        auto soundFile = m_SoundQueue.front();
+                        auto [soundFile, loop] = m_SoundQueue.front();
                         m_SoundQueue.pop();
                         lock.unlock();
 
                         Mix_Chunk* sound = Mix_LoadWAV(soundFile.c_str());
                         if (sound)
                         {
-                            int channel = Mix_PlayChannel(-1, sound, 0);
+							int loops = loop ? -1 : 0; // -1 for infinite loop, 0 for no loop
+                            int channel = Mix_PlayChannel(-1, sound, loops);
                             if (channel != -1)
                             {
                                 std::lock_guard playingLock(m_PlayingMutex);
-                                m_PlayingSounds.push_back({ channel, sound });
+                                m_PlayingSounds.emplace_back(channel, sound);
                             }
                             else
                             {
@@ -100,8 +101,8 @@ namespace dae
         }
 
     private:
-        std::thread m_Thread;
-        std::queue<std::string> m_SoundQueue;
+        std::thread m_Thread; 
+        std::queue<std::pair<std::string, bool>> m_SoundQueue;
         std::mutex m_Mutex;
         std::condition_variable m_Condition;
         bool m_Stop = false;
@@ -117,13 +118,25 @@ namespace dae
 
     SDLMixerSoundService::~SDLMixerSoundService() = default;
 
-    void SDLMixerSoundService::PlaySound(const std::string& soundFile)
+    void SDLMixerSoundService::PlaySound(const std::string& soundFile, bool loop)
     {
-        m_pImpl->EnqueueSound(soundFile);
+        m_pImpl->EnqueueSound(soundFile, loop);
     }
 
     void SDLMixerSoundService::StopAllSounds()
     {
         m_pImpl->StopAll();
+    }
+
+    void SDLMixerSoundService::MuteAll()
+    {
+        Mix_Volume(-1, 0); // Mute all channels
+        Mix_VolumeMusic(0); // Mute music
+    }
+
+    void SDLMixerSoundService::UnmuteAll()
+    {
+        Mix_Volume(-1, MIX_MAX_VOLUME); // Unmute all channels
+        Mix_VolumeMusic(MIX_MAX_VOLUME); // Unmute music
     }
 }

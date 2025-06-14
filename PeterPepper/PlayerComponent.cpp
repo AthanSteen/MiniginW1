@@ -55,8 +55,8 @@ void PlayerComponent::Move(float x, float y)
 
     // Vertical movement (ladder)
     if (y != 0.0f) {
-        glm::vec2 playerBottomPos{ currentPos.x, currentPos.y + playerSize.y - 0.5f};
-        glm::vec2 playerBottomSize{ playerSize.x, 1.0f};
+        glm::vec2 playerBottomPos{ currentPos.x + playerSize.x * 0.375f, currentPos.y + playerSize.y - 0.5f};
+        glm::vec2 playerBottomSize{ playerSize.x * 0.25f, 1.0f};
 
 		if (y > 0.0f) playerBottomSize.y += 1.5f;
 		else playerBottomPos.y -= 1.5f;
